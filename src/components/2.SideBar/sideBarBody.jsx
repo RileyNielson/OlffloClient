@@ -83,7 +83,7 @@ const StyledTreeItem = styled((props) => (
 }));
 
 export default function ListTreeView() {
-  const [Items, setItemName] = useState([items]);
+  const [ItemsName, setItemName] = useState([items]);
 
   function submitName(event) {
     const newName = event.target.value;
