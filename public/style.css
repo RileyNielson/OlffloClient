@@ -13,13 +13,13 @@ body {
   width: 100vw;
   position: fixed;
   display: grid;
-  grid-template: 66px 5px 1fr 30px /1fr;
+  grid-template: 48px 5px 1fr 30px /1fr;
   background: linear-gradient(rgb(4, 150, 255), white);
 }
 
 #mainNavBar {
   font-family: "Pacifico", cursive;
-  font-size: 25px;
+  font-size: 18px;
   grid-column: 1 / 2;
   grid-row: 1;
   height: 100%;
@@ -76,7 +76,7 @@ body {
   width: 100%;
   display: grid;
   grid-template: 30px 1fr / 300px 1fr;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 #sideBar {
@@ -128,7 +128,7 @@ body {
 }
 
 #sideBarBody {
-    box-sizing: border-box;
+  box-sizing: border-box;
   grid-column: 1/2;
   grid-row: 2/3;
   height: 100%;
@@ -148,15 +148,29 @@ body {
   border: 2px solid rgba(4, 150, 255, 1);
 }
 
+#sideBarItems{
+  border: 0;
+  color: rgb(4, 150, 255);
+  font-size: 18px;
+
+}
+
 #menuBar {
   grid-column: 2/3;
   grid-row: 1;
   height: 100%;
   background-color: white;
+  margin-left: 10px;
+  color: rgb(4, 150, 255);
   display: flex;
+  align-self: center;
   align-items: center;
   border-bottom: 2px solid rgb(245, 245, 245);
   z-index: 0;
+}
+
+#canvasSpace {
+  overflow: auto;
 }
 
 h3 {

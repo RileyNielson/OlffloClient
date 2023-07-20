@@ -7,7 +7,7 @@ function MainCanvas() {
   return (
     <div id="mainCanvas">
       <SideBar />
-      <MenuBar />
+      <MenuBar itemTitle="Main"/>
       <CanvasSpace />
     </div>
   );
