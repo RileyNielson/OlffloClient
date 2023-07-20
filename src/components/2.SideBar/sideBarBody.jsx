@@ -109,7 +109,7 @@ export default function ListTreeView() {
                 type="text"
                 name={"item" + index}
                 id="sideBarItems"
-                value={Items.title}
+                value={items.title}
                 onChange={submitName}
               />
             }
