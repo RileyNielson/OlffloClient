@@ -8,6 +8,7 @@ import Collapse from "@mui/material/Collapse";
 import { useSpring, animated } from "@react-spring/web";
 import items from "../Items";
 import { useState } from "react";
+import MakeItem from "./item";
 
 function MinusSquare(props) {
   return (
@@ -83,13 +84,13 @@ const StyledTreeItem = styled((props) => (
 }));
 
 export default function ListTreeView() {
-  const [ItemsName, setItemName] = useState([items]);
+  const [itemList, setItemList] = useState(items);
 
-  function submitName(event) {
-    const newName = event.target.value;
-    const objIndex = items.findIndex((obj => obj.id === 1));
-    items[objIndex].title = newName;
-  };
+  function addItem(newItem) {
+    setItemList((prevValues) => {
+      return [...prevValues, newItem];
+    });
+  }
 
   return (
     <div id="sideBarBody">
@@ -101,20 +102,12 @@ export default function ListTreeView() {
         defaultEndIcon={<CloseSquare />}
         sx={{ height: "100%", maxWidth: "100%", overflowX: "auto" }}
       >
-        {items.map((item, index) => (
+        {itemList.map((item, index) => (
           <StyledTreeItem
             nodeId={item.key}
-            label={
-              <input
-                type="text"
-                name={"item" + index}
-                id="sideBarItems"
-                value={items.title}
-                onChange={submitName}
-              />
-            }
+            label={<MakeItem createItem={addItem} index={index} />}
           >
-            {item.subItems.map((subItem, index) => (
+            {item.subItems.map((subItem) => (
               <StyledTreeItem nodeId={subItem.key} label={subItem.title} />
             ))}
           </StyledTreeItem>

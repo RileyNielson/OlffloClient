@@ -3,29 +3,24 @@ const items = [
     key: 1,
     id: 1,
     title: "Main",
-    rectInfo: { x: 0, y: 0, w: 100, h: 50 },
     subItems: [
       {
-        key: 2,
-        id: 2,
-        title: "Step 1",
-        rectInfo: { x: 0, y: 0, w: 100, h: 50 },
+        key: 6,
+        id: 6,
+        title: "Step A",
       },
       {
-        key: 3,
-        id: 3,
-        title: "Step 2",
-        rectInfo: { x: 0, y: 0, w: 100, h: 50 },
+        key: 7,
+        id: 7,
+        title: "Step B",
       },
       {
-        key: 4,
-        title: "Step 3",
-        rectInfo: { x: 0, y: 0, w: 100, h: 50 },
+        key: 8,
+        title: "Step C",
       },
       {
-        key: 5,
-        title: "Step 4",
-        rectInfo: { x: 0, y: 0, w: 100, h: 50 },
+        key: 9,
+        title: "Step D",
       },
     ],
   },
@@ -33,28 +28,24 @@ const items = [
     key: 2,
     id: 2,
     title: "Step 2",
-    rectInfo: { x: 0, y: 0, w: 100, h: 50 },
     subItems: []
   },
   {
     key: 3,
     id: 3,
     title: "Step 3",
-    rectInfo: { x: 0, y: 0, w: 100, h: 50 },
     subItems: []
   },
   {
     key: 4,
     id: 4,
     title: "Step 4",
-    rectInfo: { x: 0, y: 0, w: 100, h: 50 },
     subItems: []
   },
   {
     key: 5,
     id: 5,
     title: "Step 5",
-    rectInfo: { x: 0, y: 0, w: 100, h: 50 },
     subItems: []
   },
 ];
