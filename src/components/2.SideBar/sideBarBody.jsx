@@ -6,6 +6,7 @@ import TreeView from "@mui/lab/TreeView";
 import TreeItem, { treeItemClasses } from "@mui/lab/TreeItem";
 import Collapse from "@mui/material/Collapse";
 import { useSpring, animated } from "@react-spring/web";
+import items from "../Items";
 
 function MinusSquare(props) {
   return (
@@ -91,47 +92,14 @@ export default function ListTreeView() {
         defaultEndIcon={<CloseSquare />}
         sx={{ height: "100%", maxWidth: "100%", overflowX: "auto" }}
       >
-        <StyledTreeItem nodeId="1" label="Main" sx={{ width: "280px" }}>
-          <StyledTreeItem nodeId="2" label="Hello" />
-          <StyledTreeItem nodeId="3" label="Subtree with children">
-            <StyledTreeItem nodeId="6" label="Hello" />
-            <StyledTreeItem nodeId="7" label="Sub-subtree with children">
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-              <StyledTreeItem nodeId="9" label="Child 1" />
-              <StyledTreeItem nodeId="10" label="Child 2" />
-              <StyledTreeItem nodeId="11" label="Child 3" />
-            </StyledTreeItem>
-            <StyledTreeItem nodeId="8" label="Hello" />
+        {items.map((item, index) => (
+          <StyledTreeItem nodeId={item.key} label={item.title}>
+            {item.subItems.map((subItem, index) => (
+              <StyledTreeItem nodeId={subItem.key} label={subItem.title} />
+            ))}
           </StyledTreeItem>
-          <StyledTreeItem nodeId="4" label="World" />
-          <StyledTreeItem nodeId="5" label="Something something" />
-        </StyledTreeItem>
+        ))}
+        
       </TreeView>
     </div>
   );
