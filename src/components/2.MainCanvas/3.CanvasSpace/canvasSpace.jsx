@@ -2,8 +2,6 @@ import React, { useRef, useEffect } from "react";
 import items from "../../Items";
 import zoomVar from "../../zoomVar";
 
-//import DrawRectangle from "./drawRectangle";
-
 function CanvasSpace() {
   const canvas = useRef();
   let ctx = null;
@@ -45,7 +43,7 @@ function CanvasSpace() {
     const textx = x + w / 2;
     const texty = y + h / 2;
 
-    const borderColor = "black",
+    const borderColor = "rgb(0, 107, 166)",
       borderWidth = "2px",
       backgroundColor = "white";
 
@@ -60,7 +58,7 @@ function CanvasSpace() {
     ctx.font = 90 * zoomVar + "px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "rgb(4, 150, 255)";
     const text = ctx.measureText(info.title); // TextMetrics object
     ctx.fillText(info.title, textx, texty);
   };
@@ -86,7 +84,7 @@ function CanvasSpace() {
       var angle = Math.atan2(toy - fromy, tox - fromx);
 
       ctx.save();
-      ctx.strokeStyle = "black";
+      ctx.strokeStyle = "rgb(255, 188, 66)";
 
       //starting path of the arrow from the start square to the end square
       //and drawing the stroke
