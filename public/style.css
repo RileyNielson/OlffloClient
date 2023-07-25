@@ -13,14 +13,14 @@ body {
   width: 100vw;
   position: fixed;
   display: grid;
-  grid-template: 48px 5px 1fr 30px /1fr;
-  background: linear-gradient(rgb(4, 150, 255), white);
+  grid-template: 80px 5px 1fr 30px /20px 1fr 20px;
+  background: white;
 }
 
 #mainNavBar {
   font-family: "Pacifico", cursive;
-  font-size: 18px;
-  grid-column: 1 / 2;
+  font-size: 28px;
+  grid-column: 1 / 4;
   grid-row: 1;
   height: 100%;
   background-color: rgb(4, 150, 255);
@@ -28,6 +28,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-image: linear-gradient(
+      90deg,
+      rgba(4, 150, 255, 1),
+      rgba(4, 150, 255, 0.95)
+    ),
+    url(images/olffloLogo.png);
+  background-size: 30px;
+  background-position: 0px;
 }
 
 #logoBox {
@@ -62,36 +70,39 @@ body {
 #glowBar {
   height: 100%;
   width: 100%;
-  grid-column: 1/2;
+  grid-column: 1/4;
   grid-row: 2;
   background-color: rgb(255, 188, 66);
-  filter: drop-shadow(0px -2px 0px rgb(216, 17, 89));
+  filter: drop-shadow(0px 3px 0px rgb(216, 17, 89));
+  z-index: 0;
 }
 
 #mainCanvas {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 3/4;
-  background-color: white;
-  height: 100%;
+  background-color: rgb(236, 240, 243);
+  align-self: center;
+  height: 96%;
   width: 100%;
   display: grid;
   grid-template: 30px 1fr / 300px 1fr;
   overflow: hidden;
+  filter: drop-shadow(0px 0px 6px rgb(202, 202, 202));
+  border-radius: 10px;
 }
 
 #sideBar {
   box-sizing: border-box;
   grid-column: 1;
   grid-row: 1/3;
-  background-color: white;
+  background-color: rgb(236, 240, 243);
   border-right: 2px solid rgb(245, 245, 245);
   height: 100%;
   max-width: 300px;
   display: grid;
-  grid-template: 50px 1fr / 1fr;
+  grid-template: 60px 1fr / 1fr;
   justify-content: end;
   align-items: start;
-  filter: drop-shadow(3px 0px 3px lightgrey);
   z-index: 1;
 }
 
@@ -109,35 +120,46 @@ body {
   font-size: 30px;
   height: 40px;
   width: 270px;
-  color: rgb(4, 150, 255);
+  color: rgb(143, 45, 86);
   border: 2px solid transparent;
   border-radius: 10px;
   background-color: transparent;
+  box-shadow: -3px -3px 6px white, 3px 3px 5px rgba(202, 202, 202, 0.6);
 }
 
 #projectName:hover:not(:focus) {
   color: rgba(4, 150, 255, 0.6);
   border: 2px solid rgba(4, 150, 255, 0.6);
   border-radius: 10px;
+  box-shadow: inset -3px -3px 6px white,
+    inset 3px 3px 5px rgba(202, 202, 202, 0.6);
 }
 
 #projectName:focus {
+  color: rgba(4, 150, 255, 0.6);
   border: 2px solid rgb(4, 150, 255);
   border-radius: 10px;
   outline: none;
+  box-shadow: inset -3px -3px 6px white,
+    inset 3px 3px 5px rgba(202, 202, 202, 0.6);
 }
 
 #sideBarBody {
   box-sizing: border-box;
   grid-column: 1/2;
   grid-row: 2/3;
-  height: 100%;
+  height: 98%;
   margin-left: 10px;
   border-radius: 10px;
   width: 95%;
-  color: rgb(4, 150, 255);
+  color: rgb(143, 45, 86);
   overflow-y: auto;
   border: 2px solid transparent;
+}
+
+#sideBarBodyStuff {
+  width: 40%;
+  background-color: white;
 }
 
 #sideBarBody:hover {
@@ -148,18 +170,18 @@ body {
   border: 2px solid rgba(4, 150, 255, 1);
 }
 
-#sideBarItems{
+#sideBarItems {
   border: 0;
-  color: rgb(4, 150, 255);
+  color: rgb(143, 45, 86);
   font-size: 18px;
-
+  background-color: rgb(236, 240, 243);
 }
 
 #menuBar {
   grid-column: 2/3;
   grid-row: 1;
-  height: 100%;
-  background-color: white;
+  height: 80%;
+  background-color: rgb(236, 240, 243);
   margin-left: 10px;
   color: rgb(4, 150, 255);
   display: flex;
@@ -170,7 +192,7 @@ body {
 }
 
 #canvasSpace {
-  overflow: auto;
+  background-color: white;
 }
 
 h3 {
@@ -179,6 +201,7 @@ h3 {
 }
 
 #footer {
+  grid-column: 1 / 4;
   font-family: "Pacifico", cursive;
   color: white;
   height: 100%;
@@ -192,4 +215,12 @@ h3 {
 #footerImg {
   height: 70%;
   margin: 5px;
+}
+
+#submitButton{
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  background-color: transparent;
+  border: 0;
 }

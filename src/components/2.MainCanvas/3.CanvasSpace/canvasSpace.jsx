@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import items from "../Items";
-import zoomVar from "../zoomVar";
+import items from "../../Items";
+import zoomVar from "../../zoomVar";
 
 //import DrawRectangle from "./drawRectangle";
 

@@ -6,9 +6,10 @@ import TreeView from "@mui/lab/TreeView";
 import TreeItem, { treeItemClasses } from "@mui/lab/TreeItem";
 import Collapse from "@mui/material/Collapse";
 import { useSpring, animated } from "@react-spring/web";
-import items from "../Items";
+import items from "../../Items";
 import { useState } from "react";
-import MakeItem from "./item";
+import MakeItem from "./makeItem";
+import CanvasSpace from "../3.CanvasSpace/canvasSpace";
 
 function MinusSquare(props) {
   return (
@@ -83,14 +84,25 @@ const StyledTreeItem = styled((props) => (
   },
 }));
 
-export default function ListTreeView() {
-  const [itemList, setItemList] = useState(items);
+export default function ListTreeView(props) {
+  // const [itemList, setItemList] = useState(items);
 
-  function addItem(newItem) {
-    setItemList((prevValues) => {
-      return [...prevValues, newItem];
-    });
-  }
+  // function addItem(newItem) {
+  //   const indexVal = newItem.id;
+  //   console.log(indexVal);
+  //   if (indexVal < 2) {
+  //     items.shift();
+  //     items.unshift(newItem);
+  //   } else {
+  //     const listLength = items.length;
+  //     const backHalfArray = items.slice(indexVal, listLength);
+  //     items.splice(indexVal - 1, listLength);
+  //     items.push(newItem);
+  //     items.push(...backHalfArray);
+  //   }
+  //   setItemList(items);
+  //   console.log(items);
+  // }
 
   return (
     <div id="sideBarBody">
@@ -100,18 +112,32 @@ export default function ListTreeView() {
         defaultCollapseIcon={<MinusSquare />}
         defaultExpandIcon={<PlusSquare />}
         defaultEndIcon={<CloseSquare />}
-        sx={{ height: "100%", maxWidth: "100%", overflowX: "auto" }}
+        sx={{
+          height: "100%",
+          maxWidth: "100%",
+          overflowX: "auto",
+          backgroundColor: "rgb(236, 240, 243)"
+        }}
       >
-        {itemList.map((item, index) => (
+        {props.itemList.map((item, index) => (
           <StyledTreeItem
             nodeId={item.key}
-            label={<MakeItem createItem={addItem} index={index} />}
+            label={<MakeItem createItem={props.newItems} deleteItem={props.deleteItem} index={index} />}
           >
             {item.subItems.map((subItem) => (
               <StyledTreeItem nodeId={subItem.key} label={subItem.title} />
             ))}
+            <StyledTreeItem
+            nodeId={item.subItems.length + 1}
+            label={"New Sub-Item"}
+          ></StyledTreeItem>
           </StyledTreeItem>
+          
         ))}
+        <StyledTreeItem
+            nodeId={items.length + 1}
+            label={"New Item"}
+          ></StyledTreeItem>
       </TreeView>
     </div>
   );

@@ -2,11 +2,11 @@ import React from "react";
 import SideBarBody from "./sideBarBody";
 import SideBarHeader from "./sideBarHeader";
 
-function SideBar() {
+function SideBar(props) {
   return (
     <div id="sideBar">
       <SideBarHeader />
-      <SideBarBody />
+      <SideBarBody newItems={props.changeItems} deleteItem={props.deleteItem} itemList={props.itemList}/>
     </div>
   );
 }

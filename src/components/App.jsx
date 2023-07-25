@@ -1,8 +1,8 @@
 import * as React from "react";
 import Header from "./1.Header/header";
 import GlowBar from "./1.Header/glowBar";
-import MainCanvas from "./4.MainCanvas/mainCanvas";
-import Footer from "./5.Footer/footer";
+import MainCanvas from "./2.MainCanvas/mainCanvas";
+import Footer from "./3.Footer/footer";
 
 function App() {
   return (
