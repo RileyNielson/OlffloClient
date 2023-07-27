@@ -185,6 +185,7 @@ body {
   padding: 0;
   background-color: transparent;
   border: 0;
+  color: rgb(0, 107, 166);
 }
 
 #submitButton:hover {

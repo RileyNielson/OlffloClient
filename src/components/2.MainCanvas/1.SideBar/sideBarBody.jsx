@@ -27,6 +27,19 @@ function PlusSquare(props) {
   );
 }
 
+function CloseSquare(props) {
+  return (
+    <SvgIcon
+      className="close"
+      fontSize="inherit"
+      style={{ width: 14, height: 14 }}
+      {...props}
+    >
+      {/* tslint:disable-next-line: max-line-length */}
+    </SvgIcon>
+  );
+}
+
 function TransitionComponent(props) {
   const style = useSpring({
     from: {
@@ -69,6 +82,20 @@ const StyledTreeItem = styled((props) => (
 }));
 
 export default function ListTreeView(props) {
+  const blankItemKey = props.itemList.length + 1;
+
+  const blankItem = {
+    key: blankItemKey.toString(),
+    id: blankItemKey,
+    title: "New Item" + blankItemKey,
+    subItems: [],
+  };
+  
+  function addNewItem(event) {
+    props.newItems(blankItem);
+    event.preventDefault();
+  }
+
   return (
     <div id="sideBarBody">
       <TreeView
@@ -76,6 +103,7 @@ export default function ListTreeView(props) {
         defaultExpanded={["1"]}
         defaultCollapseIcon={<MinusSquare />}
         defaultExpandIcon={<PlusSquare />}
+        defaultEndIcon={<CloseSquare />}
         sx={{
           height: "100%",
           maxWidth: "100%",
@@ -85,27 +113,34 @@ export default function ListTreeView(props) {
       >
         {props.itemList.map((item, index) => (
           <StyledTreeItem
-            nodeId={item.key.toString()}
+            nodeId={item.key}
             label={
               <MakeItem
                 createItem={props.newItems}
                 deleteItem={props.deleteItem}
                 index={index}
+                itemList={props.itemList}
               />
             }
           >
-            {item.subItems.map((subItem) => (
-              <StyledTreeItem nodeId={subItem.key.toString()} label={subItem.title} />
-            ))}
-            <StyledTreeItem
-              nodeId={(item.subItems.length + 1).toString()}
-              label={"New Sub-Item"}
-            ></StyledTreeItem>
+            {/* {item.subItems.map((subItem) => (
+              <StyledTreeItem
+                nodeId={subItem.key.toString()}
+                label={subItem.title}
+              />
+            ))} */}
           </StyledTreeItem>
         ))}
         <StyledTreeItem
           nodeId={(items.length + 1).toString()}
-          label={"New Item"}
+          label={
+            <div>
+              New Item
+              <button type="submit" onClick={addNewItem} id="submitButton">
+                +
+              </button>
+            </div>
+          }
         ></StyledTreeItem>
       </TreeView>
     </div>

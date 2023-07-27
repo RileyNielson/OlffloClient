@@ -5,8 +5,8 @@ import CanvasSpace from "./3.CanvasSpace/canvasSpace";
 import items from "../Items";
 
 function MainCanvas() {
-  const [itemList, setItemList] = useState(items)
-  const [itemTitle, setItemTitle] = useState(items[0].title)
+  const [itemList, setItemList] = useState(items);
+  const [itemTitle, setItemTitle] = useState(items[0].title);
 
   function addItem(newItem) {
     const indexVal = newItem.id;
@@ -14,6 +14,8 @@ function MainCanvas() {
     if (indexVal < 2) {
       items.shift();
       items.unshift(newItem);
+    } else if (indexVal === items.length + 1) {
+      items.push(newItem);
     } else {
       const listLength = items.length;
       const backHalfArray = items.slice(indexVal, listLength);
@@ -22,8 +24,8 @@ function MainCanvas() {
       items.push(...backHalfArray);
     }
     setItemList(items);
-    setItemTitle(items[0].title)
-    console.log(items);
+    setItemTitle(items[indexVal - 1].title);
+    console.log(itemList);
   }
 
   function deleteItem(newItem) {
@@ -31,6 +33,8 @@ function MainCanvas() {
     console.log(indexVal);
     if (indexVal < 2) {
       items.shift();
+    } else if (indexVal === items.length + 1) {
+      items.pop();
     } else {
       const listLength = items.length;
       const backHalfArray = items.slice(indexVal, listLength);
@@ -38,15 +42,19 @@ function MainCanvas() {
       items.push(...backHalfArray);
     }
     setItemList(items);
-    setItemTitle(items[0].title)
-    console.log(items);
+    setItemTitle("Select Item");
+    console.log(itemList);
   }
 
   return (
     <div id="mainCanvas">
-      <SideBar changeItems={addItem} deleteItem={deleteItem} itemList={itemList}/>
-      <MenuBar itemTitle={itemTitle}/>
-      <CanvasSpace />
+      <SideBar
+        changeItems={addItem}
+        deleteItem={deleteItem}
+        itemList={itemList}
+      />
+      <MenuBar itemTitle={itemTitle} />
+      <CanvasSpace itemList={itemList} />
     </div>
   );
 }

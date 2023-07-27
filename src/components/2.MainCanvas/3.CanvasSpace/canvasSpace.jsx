@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from "react";
-import items from "../../Items";
+import React, { useRef, useEffect, useState } from "react";
 import zoomVar from "../../zoomVar";
+import { update } from "@react-spring/web";
 
-function CanvasSpace() {
+function CanvasSpace(props) {
   const canvas = useRef();
   let ctx = null;
 
@@ -18,10 +18,10 @@ function CanvasSpace() {
   });
 
   useEffect(() => {
-    items.map((item) => {
+    props.itemList.map((item) => {
       drawFillRect(item);
     });
-    items.map((item) => {
+    props.itemList.map((item) => {
       drawArrow(item.id);
     });
   });
@@ -30,7 +30,7 @@ function CanvasSpace() {
   const drawFillRect = (info) => {
     const totalWidth = 5100 * zoomVar * 1.55;
     const totalHeight = 3300 * zoomVar;
-    const itemCount = items.length;
+    const itemCount = props.itemList.length;
     const spacesCount = itemCount * 1.618 - 0.618;
     const canvasBorderWidth = 200;
     const spaceWidth = (totalWidth - canvasBorderWidth) / spacesCount;
@@ -64,11 +64,11 @@ function CanvasSpace() {
   };
 
   const drawArrow = (info) => {
-    if (info != items.length) {
+    if (info != props.itemList.length) {
       //variables to be used when creating the arrow
       const totalWidth = 5100 * zoomVar * 1.55;
       const totalHeight = 3300 * zoomVar;
-      const itemCount = items.length;
+      const itemCount = props.itemList.length;
       const spacesCount = itemCount * 1.618 - 0.618;
       const canvasBorderWidth = 200;
       const spaceWidth = (totalWidth - canvasBorderWidth) / spacesCount;
