@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function MakeItem(props) {
+function UpdateItem(props) {
   const [newItem, setNewItem] = useState(props.item);
   const [isSelected, setIsSelected] = useState(false);
 
@@ -8,44 +8,29 @@ function MakeItem(props) {
     const { value } = event.target;
     setIsSelected(true);
     setNewItem((prevItems) => {
-      const keyID = props.index + 1;
       return {
         ...prevItems,
-        key: keyID.toString(),
-        id: keyID,
         title: value,
       };
     });
   }
 
   function unfocusItem() {
-    props.createItem(newItem);
+    props.updateItem(newItem);
     setIsSelected(false);
-  }
-
-  function focusItem(){
   }
 
   function unfocusItemEnter(event) {
     if (event.key === "Enter" && isSelected) {
-      props.createItem(newItem);
+      props.updateItem(newItem);
       setIsSelected(false);
     }
     event.preventDefault();
   }
 
   function deleteItem(event) {
-    setIsSelected(true);
-    setIsSelected(false);
     props.deleteItem(props.item);
     event.preventDefault();
-  }
-
-  var itemTitle = props.item.title;
-  if (isSelected) {
-    itemTitle = newItem.title;
-  } else {
-    itemTitle = props.item.title;
   }
 
   return (
@@ -54,9 +39,10 @@ function MakeItem(props) {
         type="text"
         name={"item[" + props.index + "]"}
         id="sideBarItems"
-        value={itemTitle}
+        value={isSelected? newItem.title:props.item.title}
         onChange={updateItem}
         onKeyUp={unfocusItemEnter}
+        onFocus={props.selectItem(props.item)}
         onBlur={unfocusItem}
         autoComplete="off"
       />
@@ -67,4 +53,4 @@ function MakeItem(props) {
   );
 }
 
-export default MakeItem;
+export default UpdateItem;

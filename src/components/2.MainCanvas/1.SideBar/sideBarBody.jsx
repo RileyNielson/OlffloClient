@@ -6,9 +6,10 @@ import TreeView from "@mui/lab/TreeView";
 import TreeItem, { treeItemClasses } from "@mui/lab/TreeItem";
 import Collapse from "@mui/material/Collapse";
 import { useSpring, animated } from "@react-spring/web";
-import MakeItem from "./makeItem";
+import UpdateItem from "./updateItem";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import NewItem from "./newItem";
 
 function MinusSquare(props) {
   return (
@@ -91,7 +92,7 @@ export default function ListTreeView(props) {
   };
 
   function addNewItem(event) {
-    props.newItems(blankItem);
+    props.addItem(blankItem);
     event.preventDefault();
   }
 
@@ -114,13 +115,13 @@ export default function ListTreeView(props) {
           <StyledTreeItem
             nodeId={item.key}
             label={
-              <MakeItem
-                // key={new Date().getTime()}
-                createItem={props.newItems}
+              <UpdateItem
+                selectItem={props.selectItem}
+                updateItem={props.updateItem}
                 deleteItem={props.deleteItem}
+                itemList={props.itemList}
                 index={index}
                 item={item}
-                itemList={props.itemList}
               />
             }
           >
@@ -134,14 +135,7 @@ export default function ListTreeView(props) {
         ))}
         <StyledTreeItem
           nodeId={(props.itemList.length + 1).toString()}
-          label={
-            <div id="sideBarItems">
-              New Item
-              <button type="submit" onClick={addNewItem} id="submitButton">
-                +
-              </button>
-            </div>
-          }
+          label={<NewItem addItem={addNewItem}/>}
         ></StyledTreeItem>
       </TreeView>
     </div>

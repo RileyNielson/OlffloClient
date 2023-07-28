@@ -6,7 +6,13 @@ function SideBar(props) {
   return (
     <div id="sideBar">
       <SideBarHeader />
-      <SideBarBody newItems={props.changeItems} deleteItem={props.deleteItem} itemList={props.itemList}/>
+      <SideBarBody
+        selectItem={props.selectItem}
+        addItem={props.addItem}
+        updateItem={props.updateItem}
+        deleteItem={props.deleteItem}
+        itemList={props.itemList}
+      />
     </div>
   );
 }

@@ -8,6 +8,10 @@ function MainCanvas() {
   const [itemList, setItemList] = useState(items);
   const [itemTitle, setItemTitle] = useState(items[0].title);
 
+  function selectItem(item) {
+    setItemTitle(items[item.id - 1].title);
+  }
+
   function addItem(newItem) {
     const indexVal = newItem.id;
     items.push(newItem);
@@ -15,19 +19,17 @@ function MainCanvas() {
     setItemTitle(items[indexVal - 1].title);
   }
 
-  function updateItem(newItem) {
-    const indexVal = newItem.id;
+  function updateItem(item) {
+    const indexVal = item.id;
     console.log(indexVal);
     if (indexVal < 2) {
       items.shift();
-      items.unshift(newItem);
-    } else if (indexVal === items.length + 1) {
-      items.push(newItem);
-    } else {
+      items.unshift(item);
+    } else if (indexVal <= items.length) {
       const listLength = items.length;
       const backHalfArray = items.slice(indexVal, listLength);
       items.splice(indexVal - 1, listLength);
-      items.push(newItem);
+      items.push(item);
       items.push(...backHalfArray);
     }
     items.map((itemVal, index) => {
@@ -50,8 +52,9 @@ function MainCanvas() {
   return (
     <div id="mainCanvas">
       <SideBar
-        updateItem={updateItem}
+        selectItem={selectItem}
         addItem={addItem}
+        updateItem={updateItem}
         deleteItem={deleteItem}
         itemList={itemList}
       />
