@@ -10,6 +10,13 @@ function MainCanvas() {
 
   function addItem(newItem) {
     const indexVal = newItem.id;
+    items.push(newItem);
+    setItemList(items);
+    setItemTitle(items[indexVal - 1].title);
+  }
+
+  function updateItem(newItem) {
+    const indexVal = newItem.id;
     console.log(indexVal);
     if (indexVal < 2) {
       items.shift();
@@ -23,33 +30,28 @@ function MainCanvas() {
       items.push(newItem);
       items.push(...backHalfArray);
     }
+    items.map((itemVal, index) => {
+      itemVal.key = (index + 1).toString();
+      itemVal.id = index + 1;
+    });
     setItemList(items);
     setItemTitle(items[indexVal - 1].title);
-    console.log(itemList);
   }
 
   function deleteItem(newItem) {
     const indexVal = newItem.id;
     console.log(indexVal);
-    if (indexVal < 2) {
-      items.shift();
-    } else if (indexVal === items.length + 1) {
-      items.pop();
-    } else {
-      const listLength = items.length;
-      const backHalfArray = items.slice(indexVal, listLength);
-      items.splice(indexVal - 1, listLength);
-      items.push(...backHalfArray);
-    }
-    setItemList(items);
+    setItemList(itemList.filter((item) => item.id !== newItem.id));
     setItemTitle("Select Item");
-    console.log(itemList);
   }
+
+  console.log(itemList);
 
   return (
     <div id="mainCanvas">
       <SideBar
-        changeItems={addItem}
+        updateItem={updateItem}
+        addItem={addItem}
         deleteItem={deleteItem}
         itemList={itemList}
       />
