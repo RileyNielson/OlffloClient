@@ -4,50 +4,42 @@ import SideBar from "./1.SideBar/sideBar";
 import CanvasSpace from "./3.CanvasSpace/canvasSpace";
 import items from "../Items";
 
+var itemIDs = items.length + 1;
+
 function MainCanvas() {
   const [itemList, setItemList] = useState(items);
-  const [itemTitle, setItemTitle] = useState(items[0].title);
+  const [itemTitle, setItemTitle] = useState(itemList[0].title);
 
   function selectItem(item) {
-    setItemTitle(items[item.id - 1].title);
+    setItemTitle(item.title);
   }
 
   function addItem(newItem) {
-    const indexVal = newItem.id;
-    items.push(newItem);
-    setItemList(items);
-    setItemTitle(items[indexVal - 1].title);
+    setItemList((prevItems) => [...prevItems, newItem])
+    itemIDs++;
   }
 
   function updateItem(item) {
-    const indexVal = item.id;
-    console.log(indexVal);
-    if (indexVal < 2) {
-      items.shift();
-      items.unshift(item);
-    } else if (indexVal <= items.length) {
-      const listLength = items.length;
-      const backHalfArray = items.slice(indexVal, listLength);
-      items.splice(indexVal - 1, listLength);
-      items.push(item);
-      items.push(...backHalfArray);
-    }
-    items.map((itemVal, index) => {
-      itemVal.key = (index + 1).toString();
-      itemVal.id = index + 1;
-    });
-    setItemList(items);
-    setItemTitle(items[indexVal - 1].title);
+    setItemList(
+      itemList.map((i) => {
+        if (i.id === item.id) {
+          return item;
+        } else {
+          return i;
+        }
+      })
+    );
+    setItemTitle(item.title);
   }
 
-  function deleteItem(newItem) {
-    const indexVal = newItem.id;
-    console.log(indexVal);
-    setItemList(itemList.filter((item) => item.id !== newItem.id));
-    setItemTitle("Select Item");
+  function deleteItem(item) {
+    const newArray = itemList.filter((eachItem) => eachItem.id !== item.id)
+    newArray.map((item, index) => {
+      item.id = index + 1;
+    })
+    setItemList(newArray);
+    setItemTitle(itemList[0].title);
   }
-
-  console.log(itemList);
 
   return (
     <div id="mainCanvas">
@@ -57,6 +49,7 @@ function MainCanvas() {
         updateItem={updateItem}
         deleteItem={deleteItem}
         itemList={itemList}
+        itemIDs={itemIDs}
       />
       <MenuBar itemTitle={itemTitle} />
       <CanvasSpace itemList={itemList} />

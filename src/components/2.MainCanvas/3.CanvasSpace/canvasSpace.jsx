@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import zoomVar from "../../zoomVar";
-import { update } from "@react-spring/web";
+// import { update } from "@react-spring/web";
 
 function CanvasSpace(props) {
   const canvas = useRef();
@@ -59,12 +59,12 @@ function CanvasSpace(props) {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "rgb(4, 150, 255)";
-    const text = ctx.measureText(info.title); // TextMetrics object
+    ctx.measureText(info.title); // TextMetrics object
     ctx.fillText(info.title, textx, texty);
   };
 
   const drawArrow = (info) => {
-    if (info != props.itemList.length) {
+    if (info !== props.itemList.length) {
       //variables to be used when creating the arrow
       const totalWidth = 5100 * zoomVar * 1.55;
       const totalHeight = 3300 * zoomVar;

@@ -170,22 +170,79 @@ body {
   border: 2px solid rgba(4, 150, 255, 1);
 }
 
-#sideBarItems {
-  border: 0;
-  color: rgb(0, 107, 166);
+#sideBarLables {
   font-size: 18px;
-  /* background-color: rgb(236, 240, 243); */
+  display: grid;
+  grid-template: 1fr / 45px 100px 60px 30px;
+  border-bottom: 1px solid rgb(0, 107, 166);
+}
+
+#sideBarID {
+  grid-column: 1/2;
+  text-align: right;
+  align-items: center;
+}
+
+#sideBarTitle {
+  margin-left: 4px;
+  grid-column: 2/3;
+  text-align: left;
+  align-items: center;
+}
+
+#sideBarSuc {
+  grid-column: 3/4;
+  text-align: left;
+  align-items: center;
+}
+
+#sideBarDelete {
+  grid-column: 4/5;
+  text-align: center;
+}
+
+.sideBarItem {
+  display: grid;
+  grid-template: 1fr / 20px 100px 60px 20px;
+}
+
+.itemIDTag {
+  grid-column: 1/2;
+  text-align: right;
+  padding-right: 4px;
+  align-items: center;
+  color: rgb(216, 17, 89);
+}
+
+.sideBarTitle {
+  position: relative;
+  padding: 0;
+  grid-column: 2/3;
+  border: 0;
+  color: rgb(4, 150, 255);
+  font-size: 18px;
+  outline: none;
+}
+
+.sideBarSuc {
+  grid-column: 3/4;
+  border: 0;
+  color: rgb(255, 188, 66);
+  font-size: 18px;
+  outline: none;
 }
 
 #submitButton{
-  margin-left: 2px;
+  grid-column: 4/5;
+  justify-self: center;
   width: 20px;
-  height: 20px;
+  margin-left: 2px;
   text-align: center;
+  font-size: larger;
   padding: 0;
   background-color: transparent;
   border: 0;
-  color: rgb(0, 107, 166);
+  color: rgb(216, 17, 89);
 }
 
 #submitButton:hover {
