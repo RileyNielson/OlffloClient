@@ -22,7 +22,9 @@ function CanvasSpace(props) {
       drawFillRect(item);
     });
     props.itemList.map((item) => {
-      drawArrow(item.id);
+      item.feeds.map((suc, sucIndex) => {
+        suc !== null && drawArrow(item, suc, sucIndex);
+      });
     });
   });
 
@@ -39,6 +41,8 @@ function CanvasSpace(props) {
     const w = spaceWidth;
     const h = 500 * zoomVar;
     const y = totalHeight / 2 - h / 2;
+
+    info.coords = [x, y, w, h];
 
     const textx = x + w / 2;
     const texty = y + h / 2;
@@ -63,64 +67,78 @@ function CanvasSpace(props) {
     ctx.fillText(info.title, textx, texty);
   };
 
-  const drawArrow = (info) => {
-    if (info !== props.itemList.length) {
-      //variables to be used when creating the arrow
-      const totalWidth = 5100 * zoomVar * 1.55;
-      const totalHeight = 3300 * zoomVar;
-      const itemCount = props.itemList.length;
-      const spacesCount = itemCount * 1.618 - 0.618;
-      const canvasBorderWidth = 200;
-      const spaceWidth = (totalWidth - canvasBorderWidth) / spacesCount;
+  const drawArrow = (fromItem, toID, sucIndex) => {
+    const toItem = props.itemList[toID - 1];
+    //variables to be used when creating the arrow
+    const totalHeight = 3300 * zoomVar;
 
-      const x = (info - 1) * spaceWidth * 1.618 + canvasBorderWidth / 2;
-      const y = totalHeight / 2;
-      const w = spaceWidth;
-      const fromx = x + w,
-        fromy = y,
-        tox = fromx + spaceWidth * 0.618 - 5,
-        toy = y;
-      var headlen = 10;
-      var angle = Math.atan2(toy - fromy, tox - fromx);
+    const x = fromItem.coords[0];
+    const y = totalHeight / 2;
+    const w = fromItem.coords[2];
 
-      ctx.save();
-      ctx.strokeStyle = "rgb(255, 188, 66)";
+    var fromx = x + w,
+      fromy = y,
+      tox = toItem.coords[0] - 4,
+      toy = y;
+    if (sucIndex !== 0) {
+      fromx = x + w / 2;
+      fromy = y + fromItem.coords[3] / 2;
+      var tox1 = fromx,
+        toy1 = y + 50 * (props.itemList.length - fromItem.id),
+        tox2 = tox + toItem.coords[2] / 2 + 4,
+        toy2 = toy1;
+      tox = tox2;
+      toy = fromy + 4;
+    }
+    var headlen = 10;
+    var angle = Math.atan2(toy - fromy, tox - fromx);
 
-      //starting path of the arrow from the start square to the end square
-      //and drawing the stroke
-      ctx.beginPath();
+    ctx.save();
+    ctx.strokeStyle = "rgb(255, 188, 66)";
+
+    //starting path of the arrow from the start square to the end square
+    //and drawing the stroke
+    ctx.beginPath();
+
+    if (sucIndex === 0) {
       ctx.moveTo(fromx, fromy);
       ctx.lineTo(tox, toy);
-      ctx.lineWidth = 5;
-      ctx.stroke();
-
-      //starting a new path from the head of the arrow to one of the sides of
-      //the point
-      ctx.beginPath();
-      ctx.moveTo(tox, toy);
-      ctx.lineTo(
-        tox - headlen * Math.cos(angle - Math.PI / 7),
-        toy - headlen * Math.sin(angle - Math.PI / 7)
-      );
-
-      //path from the side point of the arrow, to the other side point
-      ctx.lineTo(
-        tox - headlen * Math.cos(angle + Math.PI / 7),
-        toy - headlen * Math.sin(angle + Math.PI / 7)
-      );
-
-      //path from the side point back to the tip of the arrow, and then
-      //again to the opposite side point
+    } else {
+      ctx.moveTo(fromx, fromy);
+      ctx.lineTo(tox1, toy1);
+      ctx.lineTo(tox2, toy2);
       ctx.lineTo(tox, toy);
-      ctx.lineTo(
-        tox - headlen * Math.cos(angle - Math.PI / 7),
-        toy - headlen * Math.sin(angle - Math.PI / 7)
-      );
-
-      //draws the paths created above
-      ctx.stroke();
-      ctx.restore();
+      angle = Math.atan2(toy - toy2, tox - tox2);
     }
+    ctx.lineWidth = 5;
+    ctx.stroke();
+
+    //starting a new path from the head of the arrow to one of the sides of
+    //the point
+    ctx.beginPath();
+    ctx.moveTo(tox, toy);
+    ctx.lineTo(
+      tox - headlen * Math.cos(angle - Math.PI / 7),
+      toy - headlen * Math.sin(angle - Math.PI / 7)
+    );
+
+    //path from the side point of the arrow, to the other side point
+    ctx.lineTo(
+      tox - headlen * Math.cos(angle + Math.PI / 7),
+      toy - headlen * Math.sin(angle + Math.PI / 7)
+    );
+
+    //path from the side point back to the tip of the arrow, and then
+    //again to the opposite side point
+    ctx.lineTo(tox, toy);
+    ctx.lineTo(
+      tox - headlen * Math.cos(angle - Math.PI / 7),
+      toy - headlen * Math.sin(angle - Math.PI / 7)
+    );
+
+    //draws the paths created above
+    ctx.stroke();
+    ctx.restore();
   };
 
   return (

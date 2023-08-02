@@ -10,7 +10,6 @@ import Item from "./Item";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import NewItem from "./newItem";
-import ItemTree from "./itemTree";
 
 function MinusSquare(props) {
   return (
@@ -82,52 +81,36 @@ const StyledTreeItem = styled((props) => (
   },
 }));
 
-function ListTreeView(props) {
+function ItemTree(props) {
   return (
-    <div id="sideBarBody">
-      <div id="sideBarLables">
-        <div id="sideBarID">ID</div>
-        <div id="sideBarTitle">Name</div>
-        <div id="sideBarSuc">Feeds</div>
-        <div id="sideBarDelete">-</div>
-      </div>
-      <div id="sideBarItems">
-        <TreeView
-          aria-label="customized"
-          defaultExpanded={["1"]}
-          defaultCollapseIcon={<MinusSquare />}
-          defaultExpandIcon={<PlusSquare />}
-          defaultEndIcon={<CloseSquare />}
-          sx={{
-            height: "100%",
-            maxWidth: "100%",
-            backgroundColor: "white",
-          }}
-        >
-          {props.itemList.map((item, index) => (
-            <ItemTree
-              selectItem={props.selectItem}
-              updateItem={props.updateItem}
-              deleteItem={props.deleteItem}
-              itemList={props.itemList}
-              index={index}
-              item={item}
-            ></ItemTree>
-          ))}
-          <StyledTreeItem
-            nodeId={"Adder"}
-            label={
-              <NewItem
-                itemList={props.itemList}
-                addItem={props.addItem}
-                itemIDs={props.itemIDs}
-              />
-            }
-          ></StyledTreeItem>
-        </TreeView>
-      </div>
-    </div>
+    <StyledTreeItem
+      nodeId={props.item.key}
+      label={
+        <Item
+          selectItem={props.selectItem}
+          updateItem={props.updateItem}
+          deleteItem={props.deleteItem}
+          itemList={props.itemList}
+          index={props.index}
+          item={props.item}
+        />
+      }
+    >
+      {props.item.subItems.map((subItem, index) => {
+        console.log(subItem);
+        return (
+          <ItemTree
+            selectItem={props.selectItem}
+            updateItem={props.updateItem}
+            deleteItem={props.deleteItem}
+            itemList={props.itemList}
+            index={index}
+            item={subItem}
+          />
+        );
+      })}
+    </StyledTreeItem>
   );
 }
 
-export default ListTreeView;
+export default ItemTree;

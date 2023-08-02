@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import DeleteItem from "./deleteItem";
+import FeedsDisplay from "./feedsDisplay";
 
 function Item(props) {
 
-  const item = props.itemList[props.index]
+  const item = props.item
 
   function updateItem(event) {
     const { name, value } = event.target;
     props.updateItem({ ...item, [name]: value });
+  }
+
+  function updateFeeds(event) {
+    const{ value } = event.target;
+    props.updateItem({...item, feeds: [...item.feeds, value]})
   }
 
   function focusItem() {
@@ -26,16 +32,8 @@ function Item(props) {
         onFocus={focusItem}
         autoComplete="off"
       />
-      <input
-        type="text"
-        name="successors"
-        className="sideBarSuc"
-        value={item.successors.join(", ")}
-        onChange={updateItem}
-        onFocus={focusItem}
-        autoComplete="off"
-      />
-      {props.index !== 0 ? (
+      <FeedsDisplay feeds={item.feeds} item={item} allFeeds={props.itemList.map((i) => i.id)} updateItem={props.updateItem}/>
+      {props.item.id !== 1 ? (
         <DeleteItem item={item} deleteItem={props.deleteItem} />
       ) : null}
     </div>

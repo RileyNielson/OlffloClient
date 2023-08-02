@@ -15,14 +15,20 @@ function MainCanvas() {
   }
 
   function addItem(newItem) {
-    setItemList((prevItems) => [...prevItems, newItem])
+    setItemList((prevItems) => {
+      const newList = [ ...prevItems];
+      newList[newItem.id - 2].feeds.push(newItem.id);
+      newList.push(newItem)
+      console.log(newList);
+      return newList;
+    });
     itemIDs++;
   }
 
   function updateItem(item) {
     setItemList(
       itemList.map((i) => {
-        if (i.id === item.id) {
+        if (i.key === item.key) {
           return item;
         } else {
           return i;
@@ -33,13 +39,28 @@ function MainCanvas() {
   }
 
   function deleteItem(item) {
-    const newArray = itemList.filter((eachItem) => eachItem.id !== item.id)
-    newArray.map((item, index) => {
-      item.id = index + 1;
-    })
+    itemList.map((i) => {
+      if (i.id > item.id) {
+        updateItem({ ...i, id: i.id - 1 });
+      }
+      i.feeds.map((suc, ind) => {
+        if (suc === item.id) {
+          updateItem({ ...i, feeds: i.feeds.filter((suc) => suc !== item.id) });
+        } else if (suc > item.id) {
+          updateItem({ ...i, feeds: [...i.feeds, i.feeds[ind]--] });
+        }
+      });
+    });
+
+    const newArray = itemList.filter((eachItem) => eachItem.key !== item.key);
+    newArray.map((i, index) => {
+      i.id = index + 1;
+    });
     setItemList(newArray);
     setItemTitle(itemList[0].title);
   }
+
+  console.log(itemList);
 
   return (
     <div id="mainCanvas">

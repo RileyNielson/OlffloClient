@@ -8,7 +8,7 @@ function DeleteItem(props) {
 
   return (
     <button type="submit" onClick={deleteItem} id="submitButton">
-      -
+      x
     </button>
   );
 }

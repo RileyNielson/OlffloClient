@@ -7,7 +7,8 @@ function NewItem(props) {
     key: blankItemKey.toString(),
     id: props.itemList.length + 1,
     title: "New Item " + blankItemKey,
-    successors: [],
+    feeds: [],
+    coords: [0, 0, 0, 0],
     subItems: [],
   };
 
@@ -17,7 +18,7 @@ function NewItem(props) {
   }
 
   return (
-    <div id="sideBarItems">
+    <div id="sideBarItem">
       New Item
       <button type="submit" onClick={addItem} id="submitButton">
         +

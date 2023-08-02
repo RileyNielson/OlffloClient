@@ -85,10 +85,10 @@ body {
   height: 96%;
   width: 100%;
   display: grid;
-  grid-template: 30px 1fr / 300px 1fr;
-  overflow: hidden;
+  grid-template: 30px 1fr / 350px 1fr;
   filter: drop-shadow(0px 0px 6px rgb(202, 202, 202));
   border-radius: 10px;
+  overflow: auto;
 }
 
 #sideBar {
@@ -97,8 +97,8 @@ body {
   grid-row: 1/3;
   background-color: rgb(236, 240, 243);
   border-right: 2px solid rgb(245, 245, 245);
-  height: 100%;
-  max-width: 300px;
+  min-height: 10px;
+  max-width: 350px;
   display: grid;
   grid-template: 60px 1fr / 1fr;
   justify-content: end;
@@ -171,9 +171,13 @@ body {
 }
 
 #sideBarLables {
+  position: absolute;
+  width: 325px;
+  z-index: 1;
+  background-color: white;
   font-size: 18px;
   display: grid;
-  grid-template: 1fr / 45px 100px 60px 30px;
+  grid-template: 1fr / 45px 150px 90px 30px;
   border-bottom: 1px solid rgb(0, 107, 166);
 }
 
@@ -186,6 +190,7 @@ body {
 #sideBarTitle {
   margin-left: 4px;
   grid-column: 2/3;
+  width: 100px;
   text-align: left;
   align-items: center;
 }
@@ -193,6 +198,7 @@ body {
 #sideBarSuc {
   grid-column: 3/4;
   text-align: left;
+  padding-left: 5px;
   align-items: center;
 }
 
@@ -201,16 +207,20 @@ body {
   text-align: center;
 }
 
+#sideBarItems {
+  height: 95%;
+  margin-top: 25px;
+  overflow-y: auto;
+}
+
 .sideBarItem {
   display: grid;
-  grid-template: 1fr / 20px 100px 60px 20px;
+  grid-template: 1fr / 40px 120px 90px 30px;
 }
 
 .itemIDTag {
   grid-column: 1/2;
-  text-align: right;
-  padding-right: 4px;
-  align-items: center;
+  margin-right: 10px;
   color: rgb(216, 17, 89);
 }
 
@@ -221,37 +231,108 @@ body {
   border: 0;
   color: rgb(4, 150, 255);
   font-size: 18px;
+  width: 90px;
   outline: none;
 }
 
-.sideBarSuc {
-  grid-column: 3/4;
-  border: 0;
-  color: rgb(255, 188, 66);
-  font-size: 18px;
-  outline: none;
+.feedContainer {
+  display: flex;
+  align-items: center;
 }
 
-#submitButton{
+.feedItems {
+  width: 90px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+}
+
+.displayItems{
+  flex-wrap: wrap;
+}
+
+.feedChip {
+  display: inline;
+  color: white;
+  background-color: rgb(250, 200, 109);
+  font-size: small;
+  width: fit-content;
+  padding-left: 5px;
+  margin-left: 3px;
+  margin-bottom: 3px;
+  padding-right: 2px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedDelete {
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  margin-left: 2px;
+  height: 15px;
+  width: 15px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedDelete:hover {
+  background-color: rgb(199, 199, 199);
+}
+
+.dropDownContent {
+  display: none;
+  position: absolute;
+  top: 100%;
+  height: 100px;
+  background-color: #f9f9f9;
+  width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  z-index: 1;
+  overflow: auto;
+}
+
+.dropDownContent div:hover {background-color: #ddd;}
+
+.show{
+  display: block;
+}
+
+.myInput {
+  width: 70px;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.myInput:focus {outline: 3px solid #ddd;}
+
+#submitButton {
   grid-column: 4/5;
   justify-self: center;
-  width: 20px;
+  width: 15px;
+  height: 20px;
+  align-self: center;
+  height: fit-content;
   margin-left: 2px;
   text-align: center;
-  font-size: larger;
+  font-size: small;
   padding: 0;
   background-color: transparent;
   border: 0;
+  border-radius: 50%;
   color: rgb(216, 17, 89);
 }
 
 #submitButton:hover {
-  border-radius: 5px;
-  box-shadow: -3px -3px 6px white,
-  3px 3px 5px rgba(202, 202, 202, 0.6);
+  background-color: rgb(199, 199, 199);
   cursor: pointer;
 }
-
 
 #menuBar {
   grid-column: 2/3;
@@ -268,7 +349,14 @@ body {
 }
 
 #canvasSpace {
+  grid-column: 2/3;
+  grid-row: 2;
   background-color: white;
+  overflow: scroll;
+}
+
+#canvas {
+  overflow: scroll;
 }
 
 h3 {
@@ -292,4 +380,3 @@ h3 {
   height: 70%;
   margin: 5px;
 }
-
