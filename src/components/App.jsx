@@ -1,21 +1,26 @@
 import * as React from "react";
-import Header from "./1.Header/header";
-import GlowBar from "./1.Header/glowBar";
-import MainCanvas from "./2.MainCanvas/mainCanvas";
-import Footer from "./3.Footer/footer";
+import Layout from "../pages/layout";
+import Home from "../pages/home";
+import NoPage from "../pages/nopage";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import OlffloApp from "../pages/olffloApp";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <div id="mainContainer">
-          <Header />
-          <GlowBar />
-          <MainCanvas />
-          <Footer />
-        </div>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />} >
+          <Route index element={<Home />} />
+          <Route path="landing" element={<OlffloApp />} />
+          <Route path="olffloApp" element={<OlffloApp />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

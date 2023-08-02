@@ -63,6 +63,20 @@ body {
     drop-shadow(2px -1px 0px rgb(216, 17, 89));
 }
 
+#headerContentContainer {
+  margin-left: 30px;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerMenuTitle {
+  font-family: "Pacifico", cursive;
+  font-size: 28px;
+  text-transform: capitalize;
+  color: white;
+}
+
 #accountMenu {
   margin-right: 20px;
 }
@@ -247,7 +261,7 @@ body {
   align-items: center;
 }
 
-.displayItems{
+.displayItems {
   flex-wrap: wrap;
 }
 
@@ -297,9 +311,11 @@ body {
   overflow: auto;
 }
 
-.dropDownContent div:hover {background-color: #ddd;}
+.dropDownContent div:hover {
+  background-color: #ddd;
+}
 
-.show{
+.show {
   display: block;
 }
 
@@ -310,7 +326,9 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
-.myInput:focus {outline: 3px solid #ddd;}
+.myInput:focus {
+  outline: 3px solid #ddd;
+}
 
 #submitButton {
   grid-column: 4/5;

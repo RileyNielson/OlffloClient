@@ -1,0 +1,4 @@
+#homeMainContainer {
+    display: grid;
+    grid-template: 80px 5px 1000px 30px /20px 1fr 20px;
+  }
