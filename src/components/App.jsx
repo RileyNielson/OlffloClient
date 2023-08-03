@@ -8,6 +8,10 @@ import {
   Route,
 } from "react-router-dom";
 import OlffloApp from "../pages/olffloApp";
+import Navbar from "../components/navBar";
+import RecordList from "../components/recordList";
+import Edit from "../components/edit";
+import Create from "../components/create";
 
 function App() {
   return (
