@@ -1,4 +1,149 @@
 #homeMainContainer {
-    display: grid;
-    grid-template: 80px 5px 1000px 30px /20px 1fr 20px;
-  }
+  display: grid;
+  grid-template: 80px 1fr 30px / 1fr;
+}
+
+#homeBody {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#homeTitle {
+  text-align: center;
+  font-size: 30px;
+  color: rgb(84, 84, 84);
+  padding: 0;
+  z-index: -1;
+}
+
+#homeTitle span {
+  top: 20px;
+  font-family: "Pacifico", cursive;
+  color: white;
+  filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 2px rgb(255, 188, 66))
+    drop-shadow(2px 2px 2px rgb(216, 17, 89));
+}
+
+#homeTitle h1 {
+  margin-bottom: 0px;
+}
+
+h3 {
+  color: rgb(4, 150, 255);
+  font-family: "Barlow", sans-serif;
+  text-align: center;
+  font-size: x-large;
+}
+
+#signUpButton {
+  position: relative;
+  z-index: -1;
+  margin-top: 40px;
+  width: 110px;
+  height: 40px;
+  color: rgb(84, 84, 84);
+  font-family: "Pacifico", cursive;
+  font-size: large;
+  border-radius: 10px;
+  background-color: white;
+  border: 0;
+  /* background-image: linear-gradient(
+    to right,
+    rgba(4, 150, 255, 1),
+    rgba(255, 188, 66, 1),
+    rgba(216, 17, 89, 1)
+  ); */
+  filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 2px rgb(255, 188, 66))
+    drop-shadow(2px 2px 2px rgb(216, 17, 89));
+}
+
+#signUpButton:hover {
+  cursor: pointer;
+}
+
+#signUpButton:active {
+  filter: drop-shadow(-2px 4px 1px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 1px rgb(255, 188, 66))
+    drop-shadow(2px 2px 1px rgb(216, 17, 89));
+}
+
+#homeCarousel {
+  position: relative;
+  margin-top: 50px;
+  width: 1500px;
+  display: flex;
+  overflow: hidden;
+  gap: 40px;
+}
+
+.carouselButton {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  color: rgb(84, 84, 84);
+}
+
+.carouselButton:hover {
+  color: lightGrey;
+  cursor: pointer;
+}
+
+.carouselButton:disabled {
+  color: lightgrey;
+}
+
+.leftButton {
+  left: 52px;
+}
+
+.rightButton {
+  right: 52px;
+}
+
+.homePic {
+  margin: 20px;
+  border-radius: 10px;
+  min-width: 300px;
+  height: 200px;
+  cursor: pointer;
+  filter: drop-shadow(-2px 4px 1px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 1px rgb(255, 188, 66))
+    drop-shadow(2px 2px 1px rgb(216, 17, 89));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#featuresContainer {
+  margin-top: 50px;
+  position: relative;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+h2 {
+  font-family: "Pacifico", cursive;
+  text-align: center;
+  font-size: 40px;
+}
+
+#features {
+  left: 10%;
+  text-align: center;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+#homeFooter {
+  grid-row: 3;
+}

@@ -15,7 +15,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />} >
           <Route index element={<Home />} />
-          <Route path="landing" element={<OlffloApp />} />
           <Route path="olffloApp" element={<OlffloApp />} />
           <Route path="*" element={<NoPage />} />
         </Route>

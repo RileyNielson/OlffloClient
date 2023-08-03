@@ -2,6 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 export default function HeaderMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -21,6 +22,7 @@ export default function HeaderMenu(props) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        endIcon={<KeyboardArrowDownIcon sx={{ color: "rgb(84, 84, 84)" }}/>}
       >
         <div className="headerMenuTitle">{props.menuTitle}</div>
       </Button>
