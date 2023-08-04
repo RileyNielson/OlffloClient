@@ -31,7 +31,7 @@ function Home(props) {
 
   return (
     <div id="homeMainContainer">
-      <Header loggedIn={props.loggedIn} setUser={props.setUser}/>
+      <Header loggedIn={props.loggedIn} setUser={props.setUser} user={props.user}/>
       <div id="homeBody">
         <div id="homeTitle">
           <h1>

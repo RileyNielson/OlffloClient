@@ -29,7 +29,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  box-shadow: 0px 3px 6px rgb(240, 240, 240) ;
+  box-shadow: 0px 3px 6px rgb(240, 240, 240);
   padding-bottom: 5px;
 }
 
@@ -51,7 +51,6 @@ body {
   filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
     drop-shadow(-2px -2px 2px rgb(255, 188, 66))
     drop-shadow(2px 2px 2px rgb(216, 17, 89));
-    
 }
 
 #logoName {
@@ -69,14 +68,14 @@ body {
 }
 
 .headerMenuTitle {
-  font-family: 'Barlow', sans-serif;
+  font-family: "Barlow", sans-serif;
   font-size: 20px;
   text-transform: capitalize;
   color: rgb(84, 84, 84);
 }
 
 #accountMenu {
-  font-family: 'Barlow', sans-serif;
+  font-family: "Barlow", sans-serif;
   font-size: 25px;
   color: rgb(84, 84, 84);
   margin-right: 50px;
@@ -122,16 +121,21 @@ body {
   border-radius: 10px;
   color: white;
   border: 0;
-  background-image: linear-gradient(to right, rgb(4, 150, 255), rgb(255, 188, 66), rgb(216, 17, 89));
-  filter: drop-shadow(-2px 4px 1px rgba(84, 84, 84, .5))
-    drop-shadow(-2px -2px 1px rgba(84, 84, 84, .5))
-    drop-shadow(2px 2px 1px rgba(84, 84, 84, .5));
+  background-image: linear-gradient(
+    to right,
+    rgb(4, 150, 255),
+    rgb(255, 188, 66),
+    rgb(216, 17, 89)
+  );
+  filter: drop-shadow(-2px 4px 1px rgba(84, 84, 84, 0.5))
+    drop-shadow(-2px -2px 1px rgba(84, 84, 84, 0.5))
+    drop-shadow(2px 2px 1px rgba(84, 84, 84, 0.5));
 }
 
 .signUpButton:active {
-  filter: drop-shadow(-1px 2px 1px rgba(84, 84, 84, .5))
-    drop-shadow(-1px -1px 1px rgba(84, 84, 84, .5))
-    drop-shadow(1px 1px 1px rgba(84, 84, 84, .5));
+  filter: drop-shadow(-1px 2px 1px rgba(84, 84, 84, 0.5))
+    drop-shadow(-1px -1px 1px rgba(84, 84, 84, 0.5))
+    drop-shadow(1px 1px 1px rgba(84, 84, 84, 0.5));
 }
 
 #glowBar {
@@ -442,7 +446,12 @@ h3 {
   height: 30px;
   width: 100%;
   background-color: rgb(255, 188, 66);
-  background-image: linear-gradient(to right, rgb(4, 150, 255), rgb(255, 188, 66), rgb(216, 17, 89));
+  background-image: linear-gradient(
+    to right,
+    rgb(4, 150, 255),
+    rgb(255, 188, 66),
+    rgb(216, 17, 89)
+  );
   display: flex;
   align-items: center;
   justify-content: center;

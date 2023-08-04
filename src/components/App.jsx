@@ -11,14 +11,16 @@ import Edit from "../components/edit";
 import Create from "../components/create";
 
 function App() {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
   const [profile, setProfile] = useState([]);
+
+  console.log(user);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home loggedIn={user !== null ? true: false} setUser={setUser}/>} />
+          <Route index element={<Home loggedIn={user !== null ? true: false} setUser={setUser} user={user} />} />
           <Route path="login" element={<Login setUser={setUser} />} />
           <Route path="olffloApp" element={<OlffloApp />} />
           <Route path="*" element={<NoPage />} />

@@ -12,6 +12,7 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { googleLogout } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
 
 export default function AccountMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,33 +23,40 @@ export default function AccountMenu(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const navigate = useNavigate();
   function logoutProfile() {
     googleLogout();
     props.setUser(null);
     handleClose();
+    navigate("/");
   }
 
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Typography sx={{ minWidth: 80 }}>Profile</Typography>
+        <Typography sx={{ minWidth: 80 }}>
+          Welcome <span style={{fontSize:"20px", color:"rgb(255, 188, 66)"}} >{props.user.userName}</span>
+        </Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{ ml: 2}}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
             <Avatar
               sx={{
-                width: 32,
-                height: 32,
-                backgroundColor: "rgb(216, 17, 89)",
+                width: 40,
+                height: 40,
+                background: "url(" + props.user.image + ")",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
             >
-              M
+              {""}
             </Avatar>
           </IconButton>
         </Tooltip>

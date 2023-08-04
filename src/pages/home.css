@@ -1,6 +1,6 @@
 #homeMainContainer {
   display: grid;
-  grid-template: 80px 1fr 30px / 1fr;
+  grid-template: 80px 1fr 30px / 1fr 5px;
 }
 
 #homeBody {

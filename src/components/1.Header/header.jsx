@@ -30,7 +30,7 @@ function Header(props) {
         </div>
       </div>
       <div id="accountMenu">
-        {props.loggedIn ? <AccountMenu setUser={props.setUser}/> : <LoginMenu />}
+        {props.loggedIn ? <AccountMenu setUser={props.setUser} user={props.user}/> : <LoginMenu />}
       </div>
     </div>
   );

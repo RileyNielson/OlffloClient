@@ -1,18 +1,33 @@
 import React from "react";
 import "./login.css";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import PlainHeader from "../components/1.Header/plainHeader";
 import Footer from "../components/3.Footer/footer";
 import { useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import jwt_decode from "jwt-decode";
 
 function Login(props) {
-  const navigate = useNavigate();
-  const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      props.setUser(tokenResponse);
-      navigate("/home");
-    },
-  });
+
+    const navigate = useNavigate();
+
+  const responseGoogle = (response) => {
+    //console.log(response);
+    const userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    localStorage.setItem("user", JSON.stringify(userObject));
+    const { name, email, sub, picture } = userObject;
+    const doc = {
+      _id: sub,
+      _type: "user",
+      userName: name,
+      email: email,
+      image: picture,
+    };
+    console.log(doc.email);
+    props.setUser(doc);
+    navigate("/");
+  };
 
   return (
     <div>
@@ -22,13 +37,21 @@ function Login(props) {
           <h1 style={{ marginBottom: 0 }}>Login</h1>
           <hr style={{ width: "60%" }}></hr>
           <div>
-            <button
-              id="googleLoginButton"
-              style={{ marginTop: "20px" }}
-              onClick={() => login()}
-            >
-              Sign in with Google{" "}
-            </button>
+            <GoogleLogin
+              render={(renderProps) => (
+                <button
+                  type="button"
+                  className=""
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  <FcGoogle className="" /> Sign in with google
+                </button>
+              )}
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy="single_host_origin"
+            />
           </div>
         </div>
       </div>
