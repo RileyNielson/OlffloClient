@@ -7,7 +7,7 @@ import homePics from "./homePics";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 
-function Home() {
+function Home(props) {
   const elementRef = useRef(null);
   const [arrowDisable, setArrowDisable] = useState(true);
 
@@ -31,7 +31,7 @@ function Home() {
 
   return (
     <div id="homeMainContainer">
-      <Header />
+      <Header loggedIn={props.loggedIn} setUser={props.setUser}/>
       <div id="homeBody">
         <div id="homeTitle">
           <h1>

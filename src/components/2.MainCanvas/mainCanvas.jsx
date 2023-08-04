@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import MenuBar from "./2.CanvasMenuBar/menuBar";
 import SideBar from "./1.SideBar/sideBar";
 import CanvasSpace from "./3.CanvasSpace/canvasSpace";
-import items from "../Items";
+import project from "../project";
 
-var itemIDs = items.length + 1;
+var itemIDs = project.items.length + 1;
 
 function MainCanvas() {
-  const [itemList, setItemList] = useState(items);
+  const [itemList, setItemList] = useState(project.items);
   const [itemTitle, setItemTitle] = useState(itemList[0].title);
 
   function selectItem(item) {

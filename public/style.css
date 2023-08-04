@@ -18,6 +18,7 @@ body {
 }
 
 #mainNavBar {
+  z-index: 1;
   position: fixed;
   height: 80px;
   width: 100vw;
@@ -79,6 +80,58 @@ body {
   font-size: 25px;
   color: rgb(84, 84, 84);
   margin-right: 50px;
+}
+
+#loginMenu {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-items: center;
+}
+
+.loginButton {
+  position: relative;
+  cursor: pointer;
+  width: 110px;
+  height: 40px;
+  color: rgb(84, 84, 84);
+  font-family: "Pacifico", cursive;
+  font-size: large;
+  border-radius: 10px;
+  background-color: white;
+  border: 0;
+  filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 2px rgb(255, 188, 66))
+    drop-shadow(2px 2px 2px rgb(216, 17, 89));
+}
+
+.loginButton:active {
+  filter: drop-shadow(-2px 4px 1px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 1px rgb(255, 188, 66))
+    drop-shadow(2px 2px 1px rgb(216, 17, 89));
+}
+
+.signUpButton {
+  position: relative;
+  cursor: pointer;
+  width: 110px;
+  height: 40px;
+  color: rgb(84, 84, 84);
+  font-family: "Pacifico", cursive;
+  font-size: large;
+  border-radius: 10px;
+  color: white;
+  border: 0;
+  background-image: linear-gradient(to right, rgb(4, 150, 255), rgb(255, 188, 66), rgb(216, 17, 89));
+  filter: drop-shadow(-2px 4px 1px rgba(84, 84, 84, .5))
+    drop-shadow(-2px -2px 1px rgba(84, 84, 84, .5))
+    drop-shadow(2px 2px 1px rgba(84, 84, 84, .5));
+}
+
+.signUpButton:active {
+  filter: drop-shadow(-1px 2px 1px rgba(84, 84, 84, .5))
+    drop-shadow(-1px -1px 1px rgba(84, 84, 84, .5))
+    drop-shadow(1px 1px 1px rgba(84, 84, 84, .5));
 }
 
 #glowBar {

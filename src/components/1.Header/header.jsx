@@ -2,8 +2,9 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import AccountMenu from "./accountMenu";
 import HeaderMenu from "./headerMenu";
+import LoginMenu from "./loginMenu";
 
-function Header() {
+function Header(props) {
   return (
     <div id="mainNavBar">
       <div id="logoBox">
@@ -15,21 +16,21 @@ function Header() {
         </Link>
         <div id="headerContentContainer">
           <div>
-            <HeaderMenu menuTitle="Spotlight" />
+            <HeaderMenu menuTitle="Templates" />
           </div>
           <div>
-            <HeaderMenu menuTitle="Business" />
+            <HeaderMenu menuTitle="Marketplace" />
           </div>
           <div>
-            <HeaderMenu menuTitle="Education" />
+            <HeaderMenu menuTitle="Company" />
           </div>
           <div>
-            <HeaderMenu menuTitle="Learn" />
+            <HeaderMenu menuTitle="Contact" />
           </div>
         </div>
       </div>
       <div id="accountMenu">
-        <AccountMenu />
+        {props.loggedIn ? <AccountMenu setUser={props.setUser}/> : <LoginMenu />}
       </div>
     </div>
   );
