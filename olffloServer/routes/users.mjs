@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 // This section will help you get a single record by id
 router.get("/:id", async (req, res) => {
   let collection = db.collection("users");
-  let query = {_id: new ObjectId(req.params.id)};
+  let query = { _id: new ObjectId(req.params.id) };
   let result = await collection.findOne(query);
 
   if (!result) res.send("Not found").status(404);
@@ -24,9 +24,8 @@ router.get("/:id", async (req, res) => {
 // This section will help you create a new record.
 router.post("/", async (req, res) => {
   let newDocument = {
-    name: req.body.name,
-    position: req.body.position,
-    level: req.body.level,
+    name: req.body.userName,
+    projects: req.body.projects,
   };
   let collection = db.collection("users");
   let result = await collection.insertOne(newDocument);
@@ -36,12 +35,11 @@ router.post("/", async (req, res) => {
 // This section will help you update a record by id.
 router.patch("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
-  const updates =  {
+  const updates = {
     $set: {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level
-    }
+      name: req.body.userName,
+      projects: req.body.projects,
+    },
   };
 
   let collection = db.collection("users");

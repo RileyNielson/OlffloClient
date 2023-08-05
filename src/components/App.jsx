@@ -6,9 +6,10 @@ import NoPage from "../pages/nopage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OlffloApp from "../pages/olffloApp";
 import Login from "../pages/login";
+import SignUp from "../pages/signUp";
 import RecordList from "../components/recordList";
 import Edit from "../components/edit";
-import Create from "../components/create";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,7 +23,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home loggedIn={user !== null ? true: false} setUser={setUser} user={user} />} />
           <Route path="login" element={<Login setUser={setUser} />} />
-          <Route path="olffloApp" element={<OlffloApp />} />
+          <Route path="signUp" element={<SignUp setUser={setUser} />} />
+          <Route path="olffloApp" element={<OlffloApp user={user}/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
         {/* <Route exact path="/" element={<RecordList />} />

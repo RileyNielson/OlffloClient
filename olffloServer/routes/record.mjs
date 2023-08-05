@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   let newDocument = {
     name: req.body.name,
-    position: req.body.position,
+    position2: req.body.position,
     level: req.body.level,
   };
   let collection = await db.collection("records");

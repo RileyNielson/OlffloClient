@@ -1,6 +1,6 @@
 #homeMainContainer {
   display: grid;
-  grid-template: 80px 1fr 30px / 1fr 5px;
+  grid-template: 80px 1fr 30px / 100vw;
 }
 
 #homeBody {
@@ -68,15 +68,16 @@ h3 {
 #homeCarousel {
   position: relative;
   margin-top: 50px;
-  width: 1500px;
+  width: 90%;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   overflow: hidden;
-  gap: 40px;
 }
 
 .carouselButton {
   position: absolute;
-  top: 50%;
   z-index: 1;
   color: rgb(84, 84, 84);
 }
@@ -87,6 +88,7 @@ h3 {
 }
 
 .carouselButton:disabled {
+  display: none;
   color: lightgrey;
 }
 
@@ -94,14 +96,29 @@ h3 {
   left: 52px;
 }
 
+.disableButton {
+    display: none;
+}
+
+.leftButton:disabled {
+  display: none;
+}
+
 .rightButton {
   right: 52px;
+}
+
+#carousel {
+  width: 80%;
+  display: flex;
+  overflow: hidden;
+  gap: 10px;
 }
 
 .homePic {
   margin: 20px;
   border-radius: 10px;
-  min-width: 300px;
+  min-width: 250px;
   height: 200px;
   cursor: pointer;
   filter: drop-shadow(-2px 4px 1px rgb(4, 150, 255))
@@ -139,4 +156,7 @@ h2 {
 
 #homeFooter {
   grid-row: 3;
+  position: relative;
+  width: 100vw;
+  bottom: 0;
 }

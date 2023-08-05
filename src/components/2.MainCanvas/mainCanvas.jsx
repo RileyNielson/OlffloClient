@@ -4,11 +4,14 @@ import SideBar from "./1.SideBar/sideBar";
 import CanvasSpace from "./3.CanvasSpace/canvasSpace";
 import project from "../project";
 
-var itemIDs = project.items.length + 1;
 
-function MainCanvas() {
+
+function MainCanvas(props) {
+  //const project = props.project
   const [itemList, setItemList] = useState(project.items);
   const [itemTitle, setItemTitle] = useState(itemList[0].title);
+
+  var itemIDs = project.items.length + 1;
 
   function selectItem(item) {
     setItemTitle(item.title);

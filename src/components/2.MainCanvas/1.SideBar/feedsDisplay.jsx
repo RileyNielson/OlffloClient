@@ -3,6 +3,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClearIcon from "@mui/icons-material/Clear";
 
 function FeedsDisplay(props) {
+
   function dropDown() {
     document
       .getElementById("dropdown" + props.item.id)
@@ -63,19 +64,19 @@ function FeedsDisplay(props) {
     }
   }
 
-  window.onclick = function (e) {
-    props.allFeeds.map((f) => {
-      if (!e.target.closest("#feedContainer" + f)) {
-        var myDropdown = document.getElementById("dropdown" + f);
-        if (myDropdown.classList.contains("show")) {
-          myDropdown.classList.remove("show");
-        }
-        document
-          .getElementById("feedItem" + f)
-          .classList.remove("displayItems");
-      }
-    });
-  };
+  // window.onclick = function (e) {
+  //   props.allFeeds.map((f) => {
+  //     if (!e.target.closest("#feedContainer" + f)) {
+  //       var myDropdown = document.getElementById("dropdown" + f);
+  //       if (myDropdown.classList.contains("show")) {
+  //         myDropdown.classList.remove("show");
+  //       }
+  //       document
+  //         .getElementById("feedItem" + f)
+  //         .classList.remove("displayItems");
+  //     }
+  //   });
+  // };
 
   return (
     <div className="feedContainer" id={"feedContainer" + props.item.id}>

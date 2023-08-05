@@ -4,14 +4,14 @@ import GlowBar from "../components/1.Header/glowBar";
 import MainCanvas from "../components/2.MainCanvas/mainCanvas";
 import Footer from "../components/3.Footer/footer";
 
-function OlffloApp() {
+function OlffloApp(props) {
   return (
     <div className="App">
       <header className="App-header">
         <div id="mainContainer">
           <Header />
           <GlowBar />
-          <MainCanvas />
+          <MainCanvas project={props.project}/>
           <Footer />
         </div>
       </header>
