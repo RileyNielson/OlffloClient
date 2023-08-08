@@ -97,7 +97,6 @@ function ItemTree(props) {
       }
     >
       {props.item.subItems.map((subItem, index) => {
-        console.log(subItem);
         return (
           <ItemTree
             selectItem={props.selectItem}

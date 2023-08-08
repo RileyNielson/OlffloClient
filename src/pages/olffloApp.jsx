@@ -11,7 +11,7 @@ function OlffloApp(props) {
         <div id="mainContainer">
           <Header />
           <GlowBar />
-          <MainCanvas project={props.project}/>
+          <MainCanvas project={props.project} setProject={props.setProject} user={props.user} setUser={props.setUser}/>
           <Footer />
         </div>
       </header>

@@ -55,7 +55,7 @@ function FeedsDisplay(props) {
     a = div.getElementsByTagName("div");
     for (i = 0; i < a.length; i++) {
       var txtValue = a[i].textContent || a[i].innerText;
-      console.log(filter);
+      // console.log(filter);
       if (txtValue.indexOf(filter) > -1 || filter === "") {
         a[i].style.display = "";
       } else {

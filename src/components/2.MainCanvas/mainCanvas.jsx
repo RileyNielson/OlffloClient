@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import MenuBar from "./2.CanvasMenuBar/menuBar";
 import SideBar from "./1.SideBar/sideBar";
 import CanvasSpace from "./3.CanvasSpace/canvasSpace";
-import project from "../project";
-
-
 
 function MainCanvas(props) {
-  //const project = props.project
-  const [itemList, setItemList] = useState(project.items);
-  const [itemTitle, setItemTitle] = useState(itemList[0].title);
+  const project = props.project;
+  const [itemTitle, setItemTitle] = useState(project.items[0].title);
 
   var itemIDs = project.items.length + 1;
 
@@ -18,31 +14,35 @@ function MainCanvas(props) {
   }
 
   function addItem(newItem) {
-    setItemList((prevItems) => {
-      const newList = [ ...prevItems];
+    // console.log(props.project);
+    props.setProject((prev) => {
+      const newList = project.items;
       newList[newItem.id - 2].feeds.push(newItem.id);
-      newList.push(newItem)
-      console.log(newList);
-      return newList;
+      newList.push(newItem);
+      return { ...prev, items: newList };
     });
+
     itemIDs++;
   }
 
   function updateItem(item) {
-    setItemList(
-      itemList.map((i) => {
-        if (i.key === item.key) {
-          return item;
-        } else {
-          return i;
-        }
-      })
-    );
+    props.setProject((prev) => {
+      return {
+        ...prev,
+        items: project.items.map((i) => {
+          if (i.key === item.key) {
+            return { item };
+          } else {
+            return { i };
+          }
+        }),
+      };
+    });
     setItemTitle(item.title);
   }
 
   function deleteItem(item) {
-    itemList.map((i) => {
+    project.items.map((i) => {
       if (i.id > item.id) {
         updateItem({ ...i, id: i.id - 1 });
       }
@@ -55,15 +55,19 @@ function MainCanvas(props) {
       });
     });
 
-    const newArray = itemList.filter((eachItem) => eachItem.key !== item.key);
+    const newArray = project.items.filter(
+      (eachItem) => eachItem.key !== item.key
+    );
     newArray.map((i, index) => {
       i.id = index + 1;
     });
-    setItemList(newArray);
-    setItemTitle(itemList[0].title);
-  }
 
-  console.log(itemList);
+    props.setProject((prev) => {
+      console.log({ ...prev, items: newArray });
+      return { ...prev, items: newArray };
+    });
+    setItemTitle(project.items[0].title);
+  }
 
   return (
     <div id="mainCanvas">
@@ -72,11 +76,15 @@ function MainCanvas(props) {
         addItem={addItem}
         updateItem={updateItem}
         deleteItem={deleteItem}
-        itemList={itemList}
+        itemList={project.items}
+        project={project}
+        setProject={props.setProject}
+        setUser={props.setUser}
+        user={props.user}
         itemIDs={itemIDs}
       />
-      <MenuBar itemTitle={itemTitle} />
-      <CanvasSpace itemList={itemList} />
+      <MenuBar itemTitle={itemTitle} project={project} user={props.user} setUser={props.setUser}/>
+      <CanvasSpace itemList={project.items} />
     </div>
   );
 }

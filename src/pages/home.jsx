@@ -7,12 +7,23 @@ import NotLoggedInHome from "../components/2.Home/notLoggedInHome";
 import LoggedInHome from "../components/2.Home/loggedInHome";
 
 function Home(props) {
-  
-
   return (
     <div id="homeMainContainer">
-      <Header loggedIn={props.loggedIn} setUser={props.setUser} user={props.user}/>
-      {props.loggedIn? <LoggedInHome user={props.user}/> : <NotLoggedInHome />}ß
+      <Header
+        loggedIn={props.loggedIn}
+        setUser={props.setUser}
+        user={props.user}
+      />
+      {props.loggedIn ? (
+        <LoggedInHome
+          user={props.user}
+          setUser={props.setUser}
+          setProject={props.setProject}
+          project={props.project}
+        />
+      ) : (
+        <NotLoggedInHome />
+      )}
       <div id="homeFooter">
         <Footer />
       </div>

@@ -17,7 +17,7 @@
   font-family: "Pacifico", cursive;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
     drop-shadow(-2px -2px 2px rgb(255, 188, 66))

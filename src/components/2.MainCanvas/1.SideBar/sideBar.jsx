@@ -5,7 +5,7 @@ import SideBarHeader from "./sideBarHeader";
 function SideBar(props) {
   return (
     <div id="sideBar">
-      <SideBarHeader />
+      <SideBarHeader setProject={props.setProject} project={props.project} setUser={props.setUser} user={props.user}/>
       <SideBarBody
         selectItem={props.selectItem}
         addItem={props.addItem}

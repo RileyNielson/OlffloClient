@@ -6,6 +6,8 @@
 
 body {
   margin: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
 #mainContainer {
@@ -62,9 +64,9 @@ body {
 
 #headerContentContainer {
   margin-left: 10px;
-  width: 500px;
+  width: 600px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .headerMenuTitle {
@@ -438,9 +440,23 @@ h3 {
   margin-left: 10px;
 }
 
+#saveButton {
+  position: relative;
+  right: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: white;
+  filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 2px rgb(255, 188, 66))
+    drop-shadow(2px 2px 2px rgb(216, 17, 89));
+}
+
 #footer {
   grid-column: 1 / 4;
   grid-row: 4;
+  position: relative;
+  bottom: 0;
+  left: 0;
   font-family: "Pacifico", cursive;
   color: white;
   height: 30px;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import "../pages/login.css";
 import { GoogleLogin } from "@react-oauth/google";
@@ -7,28 +7,26 @@ import Footer from "../components/3.Footer/footer";
 import { FcGoogle } from "react-icons/fc";
 import jwt_decode from "jwt-decode";
 
-
 export default function SignUp(props) {
-  const [form, setForm] = useState({
+  const [, setForm] = useState({
     projects: [],
   });
+
   const navigate = useNavigate();
 
   // These methods will update the state properties.
   const updateForm = (value) => {
     setForm((prev) => {
-      console.log(value);
-      onSubmit({ ...prev, ...value })
+      onSubmit({ ...prev, ...value });
       return { ...prev, ...value };
-    })
-  }
+    });
+  };
 
   // This function will handle the submission.
   async function onSubmit(newPerson) {
     // When a post request is sent to the create url, we'll add a new record to the database.
     //const newPerson = { ...form };
     props.setUser(newPerson);
-    console.log(newPerson);
 
     await fetch("http://localhost:5050/users", {
       method: "POST",
@@ -47,7 +45,6 @@ export default function SignUp(props) {
 
   const responseGoogle = (response) => {
     const userObject = jwt_decode(response.credential);
-    //console.log(userObject);
     localStorage.setItem("user", JSON.stringify(userObject));
     const { name, email, sub, picture } = userObject;
     const doc = {
@@ -56,8 +53,34 @@ export default function SignUp(props) {
       userName: name,
       email: email,
       image: picture,
+      projects: [],
     };
-    updateForm(doc);
+
+    async function fetchData() {
+      console.log(doc._id);
+      const response = await fetch(`http://localhost:5050/users/${doc._id}`);
+
+      
+      if (!response.ok) {
+        onSubmit(doc);
+        navigate("/");
+        return;
+      }
+
+      const user = await response.json();
+
+      if (!user) {
+        window.alert(`Record with id ${doc.id} not found`);
+        return;
+      } else {
+        updateForm(user);
+        props.setUser(user);
+        setForm(user);
+      }
+    }
+
+    fetchData();
+
     navigate("/");
   };
 
@@ -77,7 +100,7 @@ export default function SignUp(props) {
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
                 >
-                  <FcGoogle className="" /> Sign up with google
+                  <FcGoogle className="" /> Sign Up With Google
                 </button>
               )}
               onSuccess={responseGoogle}

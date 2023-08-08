@@ -11,11 +11,6 @@ function Item(props) {
     props.updateItem({ ...item, [name]: value });
   }
 
-  function updateFeeds(event) {
-    const{ value } = event.target;
-    props.updateItem({...item, feeds: [...item.feeds, value]})
-  }
-
   function focusItem() {
     props.selectItem(item);
   }

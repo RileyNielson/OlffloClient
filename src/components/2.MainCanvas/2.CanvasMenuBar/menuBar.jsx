@@ -2,6 +2,7 @@ import React from "react";
 import FileMenu from "./fileMenu";
 import EditMenu from "./editMenu";
 import PrintMenu from "./printMenu";
+import SaveButton from "./saveButton";
 
 function MenuBar(props) {
   return (
@@ -10,6 +11,7 @@ function MenuBar(props) {
       <FileMenu />
       <EditMenu />
       <PrintMenu />
+      <SaveButton user={props.user} setUser={props.setUser} project={props.project}/>
     </div>
   );
 }

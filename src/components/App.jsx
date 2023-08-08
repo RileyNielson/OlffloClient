@@ -13,18 +13,18 @@ import Edit from "../components/edit";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState([]);
+  const [project, setProject] = useState([]);
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home loggedIn={user !== null ? true: false} setUser={setUser} user={user} />} />
+          <Route index element={<Home loggedIn={user !== null ? true: false} setUser={setUser} user={user} setProject={setProject} project={project}/>} />
           <Route path="login" element={<Login setUser={setUser} />} />
           <Route path="signUp" element={<SignUp setUser={setUser} />} />
-          <Route path="olffloApp" element={<OlffloApp user={user}/>} />
+          <Route path="olffloApp" element={<OlffloApp user={user} project={project} setProject={setProject} setUser={setUser}/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
         {/* <Route exact path="/" element={<RecordList />} />

@@ -1,51 +1,118 @@
-import React, { useEffect, useState } from "react";
-import homePics from "./homePics";
+import React from "react";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import { useNavigate } from "react-router-dom";
+import newProject from "../newProject.js";
 
 function LoggedInHome(props) {
-  const [arrowDisable, setArrowDisable] = useState(true);
-  const [scrollPos, setScrollPos] = useState(0);
   const navigate = useNavigate();
 
-  function goToApp(projTitle) {
-    navigate("/olffloApp");
+  function GoToApp(projID) {
+    async function fetchProject() {
+      const response = await fetch(`http://localhost:5050/projects/${projID}`);
+
+      if (!response.ok) {
+        const message = `An error has occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const project = await response.json();
+
+      if (!project) {
+        window.alert(`Record with id ${projID} not found`);
+        return;
+      }
+
+      props.setProject(() => {
+        navigate("/olffloApp");
+        return project;
+      });
+    }
+
+    async function createProject() {
+      const createResponse = await fetch("http://localhost:5050/projects", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newProject),
+      }).catch((error) => {
+        window.alert(error);
+        return;
+      });
+
+      const id = await createResponse.json();
+
+      const newUserProject = {
+        title: newProject.title,
+        projectId: id.insertedId,
+        items: newProject.items,
+      };
+
+      const updatedUser = {
+        ...props.user,
+        projects: props.user.projects.push(newUserProject),
+      };
+
+      props.setUser(() => {
+        return updatedUser;
+      });
+
+      // This will send a post request to update the data in the database.
+      await fetch(`http://localhost:5050/users/${props.user._id}`, {
+        method: "PATCH",
+        body: JSON.stringify(updatedUser),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      props.setProject(() => {
+        navigate("/olffloApp");
+        return newUserProject;
+      });
+    }
+
+    if (projID !== "New Project") {
+      fetchProject();
+    } else {
+      createProject();
+    }
   }
 
   function handleHorizontalScroll(element, step) {
     let scrollAmount = 150;
     const slideTimer = setInterval(() => {
       element.scrollLeft += step;
-      setScrollPos(element.scrollLeft);
       scrollAmount += Math.abs(step);
       if (scrollAmount >= element.offsetWidth) {
         clearInterval(slideTimer);
       }
       if (element.scrollLeft <= 0) {
-        setArrowDisable(true);
         document.getElementById("leftArrow").classList.add("disableButton");
         document.getElementById("rightArrow").classList.remove("disableButton");
       } else if (
         element.scrollLeft >=
         element.scrollWidth - element.clientWidth
       ) {
-        setArrowDisable(true);
         document.getElementById("leftArrow").classList.remove("disableButton");
         document.getElementById("rightArrow").classList.add("disableButton");
       } else {
-        setArrowDisable(false);
         document.getElementById("leftArrow").classList.remove("disableButton");
         document.getElementById("rightArrow").classList.remove("disableButton");
       }
     }, 5);
   }
+
+  console.log(props.project);
+
   return (
     <div id="homeBody">
       <div id="homeTitle">
         <h1>Welcome {props.user.userName}</h1>
       </div>
-      <h3>Choose a project:</h3>
+      <h3>Choose a project to work on:</h3>
       <div id="homeCarousel">
         <div
           id="leftArrow"
@@ -57,19 +124,24 @@ function LoggedInHome(props) {
           <ArrowCircleLeftIcon fontSize="large" />
         </div>
         <div id="carousel">
-          {props.user.projects.map((proj) => (
-            <div
-              className="homePic"
-              style={{ backgroundColor: proj.color }}
-              onClick={() => {goToApp(proj.title)}}
-            >
-              {proj.title}
-            </div>
-          ))}
+          {props.user.projects != null &&
+            props.user.projects.map((proj) => (
+              <div
+                className="homePic"
+                style={{ backgroundColor: "blue" }}
+                onClick={() => {
+                  GoToApp(proj.projectId);
+                }}
+              >
+                {proj.title}
+              </div>
+            ))}
           <div
             className="homePic"
             style={{ backgroundColor: "white" }}
-            onClick={() => {goToApp("New Project")}}
+            onClick={() => {
+              GoToApp("New Project");
+            }}
           >
             Start New Project...
           </div>

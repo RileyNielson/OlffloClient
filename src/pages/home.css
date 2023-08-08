@@ -1,17 +1,19 @@
 #homeMainContainer {
-  display: grid;
-  grid-template: 80px 1fr 30px / 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
 }
 
 #homeBody {
-  grid-row: 2;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 #homeTitle {
+  margin-top: 100px;
   text-align: center;
   font-size: 30px;
   color: rgb(84, 84, 84);
@@ -31,10 +33,10 @@
 #homeTitle h1 {
   font-family: "Barlow", sans-serif;
   font-weight: 700;
-  margin-bottom: 0px;
 }
 
 h3 {
+  margin-top: 0px;
   color: rgb(4, 150, 255);
   font-family: "Barlow", sans-serif;
   font-weight: 100;
@@ -97,7 +99,7 @@ h3 {
 }
 
 .disableButton {
-    display: none;
+  display: none;
 }
 
 .leftButton:disabled {
@@ -131,32 +133,45 @@ h3 {
 
 #featuresContainer {
   margin-top: 50px;
+  height: fit-content;
   position: relative;
-  height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
 }
 
-h2 {
+#subheading {
   font-family: "Pacifico", cursive;
   text-align: center;
   font-size: 40px;
 }
 
 #features {
-  left: 10%;
   text-align: center;
   width: 80%;
   display: flex;
-  justify-content: center;
   gap: 50px;
 }
 
+#projectOpen {
+  cursor: pointer;
+  position: absolute;
+  padding: 5px;
+  border: 1px solid rgb(84, 84, 84);
+  border-radius: 10px;
+  background-color: white;
+  filter: drop-shadow(-2px 2px 1px rgb(84, 84, 84));
+}
+
+.displayButton {
+  display: none;
+}
+
+#projectOpen:active {
+  filter: drop-shadow(-1px 1px 1px rgb(84, 84, 84));
+}
+
 #homeFooter {
-  grid-row: 3;
   position: relative;
   width: 100vw;
-  bottom: 0;
 }
