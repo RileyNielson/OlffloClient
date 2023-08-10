@@ -1,44 +1,10 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import SvgIcon from "@mui/material/SvgIcon";
 import { alpha, styled } from "@mui/material/styles";
-import TreeView from "@mui/lab/TreeView";
 import TreeItem, { treeItemClasses } from "@mui/lab/TreeItem";
 import Collapse from "@mui/material/Collapse";
 import { useSpring, animated } from "@react-spring/web";
 import Item from "./Item";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import NewItem from "./newItem";
-
-function MinusSquare(props) {
-  return (
-    <SvgIcon fontSize="inherit" style={{ width: 14, height: 14 }} {...props}>
-      <KeyboardArrowDownIcon />
-    </SvgIcon>
-  );
-}
-
-function PlusSquare(props) {
-  return (
-    <SvgIcon fontSize="inherit" style={{ width: 14, height: 14 }} {...props}>
-      <KeyboardArrowRightIcon />
-    </SvgIcon>
-  );
-}
-
-function CloseSquare(props) {
-  return (
-    <SvgIcon
-      className="close"
-      fontSize="inherit"
-      style={{ width: 14, height: 14 }}
-      {...props}
-    >
-      {/* tslint:disable-next-line: max-line-length */}
-    </SvgIcon>
-  );
-}
 
 function TransitionComponent(props) {
   const style = useSpring({
@@ -96,18 +62,19 @@ function ItemTree(props) {
         />
       }
     >
-      {props.item.subItems.map((subItem, index) => {
-        return (
-          <ItemTree
-            selectItem={props.selectItem}
-            updateItem={props.updateItem}
-            deleteItem={props.deleteItem}
-            itemList={props.itemList}
-            index={index}
-            item={subItem}
-          />
-        );
-      })}
+      {Array.isArray(props.item.subItems) &&
+        props.item.subItems.map((subItem, index) => {
+          return (
+            <ItemTree
+              selectItem={props.selectItem}
+              updateItem={props.updateItem}
+              deleteItem={props.deleteItem}
+              itemList={props.itemList}
+              index={index}
+              item={subItem}
+            />
+          );
+        })}
     </StyledTreeItem>
   );
 }

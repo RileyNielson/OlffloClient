@@ -34,7 +34,7 @@ function CanvasSpace(props) {
     const totalHeight = 3300 * zoomVar;
     const itemCount = props.itemList.length;
     const spacesCount = itemCount * 1.618 - 0.618;
-    const canvasBorderWidth = 200;
+    const canvasBorderWidth = 400;
     const spaceWidth = (totalWidth - canvasBorderWidth) / spacesCount;
 
     const x = (info.id - 1) * spaceWidth * 1.618 + canvasBorderWidth / 2;
@@ -79,31 +79,75 @@ function CanvasSpace(props) {
     var fromx = x + w,
       fromy = y,
       tox = toItem.coords[0] - 4,
-      toy = y;
-    if (sucIndex !== 0) {
-      fromx = x + w / 2;
+      toy = y,
+      tox1,
+      toy1,
+      tox2,
+      toy2;
+    if (fromItem.id + 1 < toID) {
+      fromx = x + (w * 3) / 4;
       fromy = y + fromItem.coords[3] / 2;
-      var tox1 = fromx,
-        toy1 = y + 50 * (props.itemList.length - fromItem.id),
-        tox2 = tox + toItem.coords[2] / 2 + 4,
-        toy2 = toy1;
+      tox1 = fromx;
+      toy1 = y + 50 + 15 * (props.itemList.length - fromItem.id - 1);
+      tox2 = tox + toItem.coords[2] / 4 + 4;
+      toy2 = toy1;
       tox = tox2;
       toy = fromy + 4;
+    } else if (fromItem.id + 1 > toID) {
+      fromx = x + w / 4;
+      fromy = y - fromItem.coords[3] / 2;
+      tox1 = fromx;
+      toy1 = y - 50 - 15 * (props.itemList.length - toID);
+      tox2 = tox + (toItem.coords[2] * 3) / 4 + 4;
+      toy2 = toy1;
+      tox = tox2;
+      toy = fromy - 4;
     }
     var headlen = 10;
     var angle = Math.atan2(toy - fromy, tox - fromx);
 
     ctx.save();
-    ctx.strokeStyle = "rgb(255, 188, 66)";
 
     //starting path of the arrow from the start square to the end square
     //and drawing the stroke
     ctx.beginPath();
 
-    if (sucIndex === 0) {
+    if (fromItem.id + 1 === toID) {
+      ctx.strokeStyle = "rgb(255, 188, 66)";
       ctx.moveTo(fromx, fromy);
       ctx.lineTo(tox, toy);
+    } else if (fromItem.id + 1 < toID) {
+      ctx.strokeStyle =
+        "rgb(" +
+        (4 +
+          Math.floor((255 - 4) / (props.itemList.length - 2)) *
+            (fromItem.id - 1)) +
+        ", " +
+        (150 +
+          Math.floor((188 - 150) / (props.itemList.length - 2)) *
+            (fromItem.id - 1)) +
+        ", " +
+        (255 -
+          Math.floor((255 - 66) / (props.itemList.length - 2)) *
+            (fromItem.id - 1)) +
+        ")";
+      ctx.moveTo(fromx, fromy);
+      ctx.lineTo(tox1, toy1);
+      ctx.lineTo(tox2, toy2);
+      ctx.lineTo(tox, toy);
+      angle = Math.atan2(toy - toy2, tox - tox2);
     } else {
+      ctx.strokeStyle =
+        "rgb(" +
+        (216 +
+          Math.floor((255-216) / (props.itemList.length - 1)) * (toID - 1)) +
+        ", " +
+        (17 +
+          Math.floor((188 - 17) / (props.itemList.length - 1)) * (toID - 1)) +
+        ", " +
+        (89 -
+          Math.floor((89 - 66) / (props.itemList.length - 1)) * (toID - 1)) +
+        ")";
       ctx.moveTo(fromx, fromy);
       ctx.lineTo(tox1, toy1);
       ctx.lineTo(tox2, toy2);

@@ -127,8 +127,15 @@ h3 {
     drop-shadow(-2px -2px 1px rgb(255, 188, 66))
     drop-shadow(2px 2px 1px rgb(216, 17, 89));
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.projectThumbnail {
+    margin-top: 10px;
+    height: 70%;
+    width: 70%;
 }
 
 #featuresContainer {

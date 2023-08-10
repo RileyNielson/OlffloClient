@@ -7,6 +7,9 @@ function MainCanvas(props) {
   const project = props.project;
   const [itemTitle, setItemTitle] = useState(project.items[0].title);
 
+  var imageURL;
+  console.log(project);
+
   var itemIDs = project.items.length + 1;
 
   function selectItem(item) {
@@ -14,34 +17,49 @@ function MainCanvas(props) {
   }
 
   function addItem(newItem) {
-    // console.log(props.project);
+    imageURL = document.getElementById("canvas").toDataURL();
     props.setProject((prev) => {
       const newList = project.items;
-      newList[newItem.id - 2].feeds.push(newItem.id);
-      newList.push(newItem);
-      return { ...prev, items: newList };
+      var feedAlreadyExists = false;
+      newList[newItem.id - 2].feeds.map((f) => {
+        if (f === newItem.id) {
+          feedAlreadyExists = true;
+        }
+      });
+      !feedAlreadyExists &&
+        (newList[newItem.id - 2].feeds = [
+          ...newList[newItem.id - 2].feeds,
+          newItem.id,
+        ]);
+      console.log(newList);
+      return { ...prev, image: imageURL, items: [...newList, newItem] };
     });
 
     itemIDs++;
   }
 
   function updateItem(item) {
+    imageURL = document.getElementById("canvas").toDataURL();
     props.setProject((prev) => {
       return {
         ...prev,
+        image: imageURL,
         items: project.items.map((i) => {
           if (i.key === item.key) {
-            return { item };
+            return { ...item };
           } else {
-            return { i };
+            return { ...i };
           }
         }),
       };
     });
+
+    console.log("done");
     setItemTitle(item.title);
   }
 
   function deleteItem(item) {
+    imageURL = document.getElementById("canvas").toDataURL();
     project.items.map((i) => {
       if (i.id > item.id) {
         updateItem({ ...i, id: i.id - 1 });
@@ -63,11 +81,13 @@ function MainCanvas(props) {
     });
 
     props.setProject((prev) => {
-      console.log({ ...prev, items: newArray });
-      return { ...prev, items: newArray };
+      console.log({ ...prev, image: imageURL, items: newArray });
+      return { ...prev, image: imageURL, items: newArray };
     });
     setItemTitle(project.items[0].title);
   }
+
+  console.log(props.project);
 
   return (
     <div id="mainCanvas">
@@ -83,7 +103,13 @@ function MainCanvas(props) {
         user={props.user}
         itemIDs={itemIDs}
       />
-      <MenuBar itemTitle={itemTitle} project={project} user={props.user} setUser={props.setUser}/>
+      <MenuBar
+        itemTitle={itemTitle}
+        project={project}
+        setProject={props.setProject}
+        user={props.user}
+        setUser={props.setUser}
+      />
       <CanvasSpace itemList={project.items} />
     </div>
   );

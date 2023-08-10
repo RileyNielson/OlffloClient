@@ -26,6 +26,7 @@ router.post("/", async (req, res) => {
   let newDocument = {
     title: req.body.title,
     items: req.body.items,
+    image: req.body.image,
   };
   let collection = db.collection("projects");
   let result = await collection.insertOne(newDocument);
@@ -38,7 +39,8 @@ router.patch("/:id", async (req, res) => {
   const updates = {
     $set: {
       items: req.body.items,
-      title: req.body.title
+      title: req.body.title,
+      image: req.body.image,
     },
   };
 

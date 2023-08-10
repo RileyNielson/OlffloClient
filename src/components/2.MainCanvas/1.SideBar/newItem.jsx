@@ -6,7 +6,8 @@ function NewItem(props) {
   const blankItem = {
     key: blankItemKey.toString(),
     id: props.itemList.length + 1,
-    title: "New Item " + blankItemKey,
+    title: "New Item",
+    image: "../../public/images/olffloLogo.png",
     feeds: [],
     coords: [0, 0, 0, 0],
     subItems: [],

@@ -59,7 +59,6 @@ export default function SignUp(props) {
     async function fetchData() {
       console.log(doc._id);
       const response = await fetch(`http://localhost:5050/users/${doc._id}`);
-
       
       if (!response.ok) {
         onSubmit(doc);

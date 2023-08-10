@@ -5,16 +5,21 @@ function SaveButton(props) {
     e.preventDefault();
 
     // This will send a post request to update the data in the database.
-    const response = await fetch(`http://localhost:5050/projects/${props.project.projectId}`, {
-      method: "PATCH",
-      body: JSON.stringify(props.project),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:5050/projects/${props.project._id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(props.project),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log(props.user);
 
     // This will send a post request to update the data in the database.
-    const response2 = await fetch(`http://localhost:5050/users/${props.user._id}`, {
+    await fetch(`http://localhost:5050/users/${props.user._id}`, {
       method: "PATCH",
       body: JSON.stringify(props.user),
       headers: {
@@ -25,7 +30,11 @@ function SaveButton(props) {
     console.log(response);
   }
 
-  return <div id="saveButton" onClick={saveProject}>Save</div>;
+  return (
+    <div id="saveButton" onClick={saveProject}>
+      Save
+    </div>
+  );
 }
 
 export default SaveButton;

@@ -6,7 +6,7 @@ import newProject from "../newProject.js";
 
 function LoggedInHome(props) {
   const navigate = useNavigate();
-
+  
   function GoToApp(projID) {
     async function fetchProject() {
       const response = await fetch(`http://localhost:5050/projects/${projID}`);
@@ -23,6 +23,8 @@ function LoggedInHome(props) {
         window.alert(`Record with id ${projID} not found`);
         return;
       }
+
+      console.log(project);
 
       props.setProject(() => {
         navigate("/olffloApp");
@@ -46,14 +48,22 @@ function LoggedInHome(props) {
 
       const newUserProject = {
         title: newProject.title,
-        projectId: id.insertedId,
+        _id: id.insertedId,
         items: newProject.items,
+        image: newProject.image,
       };
 
-      const updatedUser = {
-        ...props.user,
-        projects: props.user.projects.push(newUserProject),
-      };
+      console.log([...props.user.projects, newUserProject]);
+
+      const updatedUser =
+        props.user.projects.length > 0
+          ? {
+              ...props.user,
+              projects: [...props.user.projects, newUserProject],
+            }
+          : { ...props.user, projects: [newUserProject] };
+
+      console.log(updatedUser);
 
       props.setUser(() => {
         return updatedUser;
@@ -105,8 +115,6 @@ function LoggedInHome(props) {
     }, 5);
   }
 
-  console.log(props.project);
-
   return (
     <div id="homeBody">
       <div id="homeTitle">
@@ -124,16 +132,20 @@ function LoggedInHome(props) {
           <ArrowCircleLeftIcon fontSize="large" />
         </div>
         <div id="carousel">
-          {props.user.projects != null &&
+          {Array.isArray(props.user.projects) &&
             props.user.projects.map((proj) => (
               <div
                 className="homePic"
-                style={{ backgroundColor: "blue" }}
+                style={{ backgroundColor: "white" }}
                 onClick={() => {
-                  GoToApp(proj.projectId);
+                  GoToApp(proj._id);
                 }}
               >
-                {proj.title}
+                <img
+                  className="projectThumbnail"
+                  src={proj.image}
+                />{console.log(proj)}
+                <div>{proj.title}</div>
               </div>
             ))}
           <div

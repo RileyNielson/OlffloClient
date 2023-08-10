@@ -7,20 +7,21 @@ function SideBarHeader(props) {
     const newTitle = event.target.value;
 
     props.setProject((prev) => {
+      const imageURL = document.getElementById("canvas").toDataURL();
       console.log(props.project);
       console.log(props.user.projects);
       props.setUser(() => {
-        const newItem = { title: newTitle, projectId: props.project._id };
+        const newItem = {...props.project, title: newTitle };
         if (props.user.projects.length > 1) {
           const newArray = props.user.projects.filter(
-            (proj) => proj.id !== props.project._id
+            (proj) => proj._id !== props.project._id
           );
-
           return {
             ...props.user,
-            projects: newArray.push(newItem),
+            projects: [newItem, ...newArray],
           };
         } else {
+          console.log(props.project._id);
           return {
             ...props.user,
             projects: [newItem],
@@ -28,13 +29,11 @@ function SideBarHeader(props) {
         }
       });
 
-      return { ...prev, title: newTitle };
+      return { ...prev, image: imageURL, title: newTitle };
     });
 
     setProjectTitle(newTitle);
   }
-
-  console.log(props.project);
 
   return (
     <div id="sideBarHeader">

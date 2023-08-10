@@ -7,8 +7,9 @@ function Item(props) {
   const item = props.item
 
   function updateItem(event) {
-    const { name, value } = event.target;
-    props.updateItem({ ...item, [name]: value });
+    const { value } = event.target;
+    console.log({ ...item, title: value });
+    props.updateItem({ ...item, title: value });
   }
 
   function focusItem() {
