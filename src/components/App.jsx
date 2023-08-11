@@ -7,8 +7,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OlffloApp from "../pages/olffloApp";
 import Login from "../pages/login";
 import SignUp from "../pages/signUp";
-import RecordList from "../components/recordList";
-import Edit from "../components/edit";
 
 function App() {
   const [user, setUser] = useState(null);

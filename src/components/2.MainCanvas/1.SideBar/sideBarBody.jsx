@@ -119,7 +119,7 @@ function ListTreeView(props) {
               <NewItem
                 itemList={props.itemList}
                 addItem={props.addItem}
-                itemIDs={props.itemIDs}
+                itemKeys={props.itemKeys}
               />
             }
           ></StyledTreeItem>

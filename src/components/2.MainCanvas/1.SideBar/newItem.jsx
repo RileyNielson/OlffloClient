@@ -1,10 +1,10 @@
 import React from "react";
 
 function NewItem(props) {
-  const blankItemKey = props.itemIDs;
+  const blankItemKey = props.itemKeys;
 
   const blankItem = {
-    key: blankItemKey.toString(),
+    key: crypto.randomUUID(),
     id: props.itemList.length + 1,
     title: "New Item",
     image: "../../public/images/olffloLogo.png",

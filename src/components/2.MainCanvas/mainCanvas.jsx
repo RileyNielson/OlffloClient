@@ -6,9 +6,16 @@ import CanvasSpace from "./3.CanvasSpace/canvasSpace";
 function MainCanvas(props) {
   const project = props.project;
   const [itemTitle, setItemTitle] = useState(project.items[0].title);
+  const [itemKeys, setItemKeys] = useState(
+    Math.max(
+      project.items.map((i) => {
+        return Number(i.key);
+      })
+    )
+  );
 
   var imageURL;
-  console.log(project);
+  // console.log(project);
 
   var itemIDs = project.items.length + 1;
 
@@ -35,11 +42,12 @@ function MainCanvas(props) {
       return { ...prev, image: imageURL, items: [...newList, newItem] };
     });
 
-    itemIDs++;
+    setItemKeys(itemKeys + 1);
   }
 
   function updateItem(item) {
     imageURL = document.getElementById("canvas").toDataURL();
+    console.log(item);
     props.setProject((prev) => {
       return {
         ...prev,
@@ -54,40 +62,63 @@ function MainCanvas(props) {
       };
     });
 
-    console.log("done");
     setItemTitle(item.title);
   }
 
   function deleteItem(item) {
     imageURL = document.getElementById("canvas").toDataURL();
-    project.items.map((i) => {
-      if (i.id > item.id) {
-        updateItem({ ...i, id: i.id - 1 });
-      }
-      i.feeds.map((suc, ind) => {
-        if (suc === item.id) {
-          updateItem({ ...i, feeds: i.feeds.filter((suc) => suc !== item.id) });
-        } else if (suc > item.id) {
-          updateItem({ ...i, feeds: [...i.feeds, i.feeds[ind]--] });
-        }
-      });
-    });
 
-    const newArray = project.items.filter(
+    var newArray = project.items.filter(
       (eachItem) => eachItem.key !== item.key
     );
-    newArray.map((i, index) => {
+
+    console.log(newArray);
+    const mappedArray = newArray.map((i) => {
+      var feedsArray = i.feeds;
+      var filterFeeds = false;
+      var reduceFeeds = false;
+      var reduceFeedIndex;
+      i.feeds.map((suc, ind) => {
+        console.log(suc, item.id);
+        if (suc === item.id) {
+          filterFeeds = true;
+        } else if (suc > item.id) {
+          reduceFeeds = true;
+          reduceFeedIndex = ind;
+        }
+      });
+      if (filterFeeds) {
+        feedsArray = i.feeds.filter((suc) => suc != item.id);
+      }
+      if (reduceFeeds) {
+        feedsArray = [i.feeds[reduceFeedIndex] - 1];
+        console.log([i.feeds[reduceFeedIndex] - 1]);
+      }
+      console.log(feedsArray);
+      if (i.id > item.id) {
+        console.log({ ...i, id: i.id - 1, feedsArray });
+        // updateItem({ ...i, id: i.id - 1 });
+        return { ...i, id: i.id - 1, feeds: feedsArray };
+      }
+      console.log({ ...i, feedsArray });
+      return { ...i, feeds: feedsArray };
+    });
+
+    console.log(mappedArray);
+
+    mappedArray.map((i, index) => {
       i.id = index + 1;
     });
 
     props.setProject((prev) => {
-      console.log({ ...prev, image: imageURL, items: newArray });
-      return { ...prev, image: imageURL, items: newArray };
+      console.log({ ...prev, image: imageURL, items: mappedArray });
+      return { ...prev, image: imageURL, items: mappedArray };
     });
+
     setItemTitle(project.items[0].title);
   }
 
-  console.log(props.project);
+  // console.log(props.project);
 
   return (
     <div id="mainCanvas">
@@ -101,7 +132,7 @@ function MainCanvas(props) {
         setProject={props.setProject}
         setUser={props.setUser}
         user={props.user}
-        itemIDs={itemIDs}
+        itemKeys={itemKeys}
       />
       <MenuBar
         itemTitle={itemTitle}
