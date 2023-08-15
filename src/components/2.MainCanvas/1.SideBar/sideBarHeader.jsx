@@ -7,29 +7,23 @@ function SideBarHeader(props) {
     const newTitle = event.target.value;
 
     props.setProject((prev) => {
-      const imageURL = document.getElementById("canvas").toDataURL();
-      console.log(props.project);
-      console.log(props.user.projects);
-      props.setUser(() => {
-        const newItem = {...props.project, title: newTitle };
-        if (props.user.projects.length > 1) {
-          const newArray = props.user.projects.filter(
-            (proj) => proj._id !== props.project._id
-          );
-          return {
-            ...props.user,
-            projects: [newItem, ...newArray],
-          };
-        } else {
-          console.log(props.project._id);
-          return {
-            ...props.user,
-            projects: [newItem],
-          };
-        }
+      props.setUser((prev) => {
+
+        const newProjectsArray = props.user.projects.map((p) => {
+          if (p._id === props.project._id) {
+            return ({...p, title: newTitle});
+          } else {
+            return {...p};
+          }
+        });
+
+        return {
+          ...prev,
+          projects: newProjectsArray,
+        };
       });
 
-      return { ...prev, image: imageURL, title: newTitle };
+      return { ...prev, title: newTitle };
     });
 
     setProjectTitle(newTitle);

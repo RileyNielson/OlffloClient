@@ -1,4 +1,5 @@
 import React from "react";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function DeleteItem(props) {
   function deleteItem() {
@@ -8,7 +9,7 @@ function DeleteItem(props) {
 
   return (
     <button type="submit" onClick={deleteItem} id="submitButton">
-      x
+      <DeleteForeverIcon fontSize="small"/>
     </button>
   );
 }

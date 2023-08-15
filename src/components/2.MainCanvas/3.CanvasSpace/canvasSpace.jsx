@@ -23,7 +23,6 @@ function CanvasSpace(props) {
     });
     props.itemList.map((item) => {
       item.feeds.map((suc, sucIndex) => {
-        // console.log(props.itemList);
         suc !== null && drawArrow(item, suc, sucIndex);
       });
     });
@@ -76,7 +75,6 @@ function CanvasSpace(props) {
     const x = fromItem.coords[0];
     const y = totalHeight / 2;
     const w = fromItem.coords[2];
-
 
     var fromx = x + w,
       fromy = y,

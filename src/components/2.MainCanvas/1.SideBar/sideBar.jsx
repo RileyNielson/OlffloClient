@@ -12,7 +12,6 @@ function SideBar(props) {
         updateItem={props.updateItem}
         deleteItem={props.deleteItem}
         itemList={props.itemList}
-        itemKeys={props.itemKeys}
       />
     </div>
   );

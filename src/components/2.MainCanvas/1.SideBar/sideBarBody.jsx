@@ -82,6 +82,7 @@ const StyledTreeItem = styled((props) => (
 }));
 
 function ListTreeView(props) {
+
   return (
     <div id="sideBarBody">
       <div id="sideBarLables">
@@ -119,7 +120,6 @@ function ListTreeView(props) {
               <NewItem
                 itemList={props.itemList}
                 addItem={props.addItem}
-                itemKeys={props.itemKeys}
               />
             }
           ></StyledTreeItem>

@@ -1,7 +1,6 @@
 import React from "react";
 
 function NewItem(props) {
-  const blankItemKey = props.itemKeys;
 
   const blankItem = {
     key: crypto.randomUUID(),

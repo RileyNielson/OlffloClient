@@ -6,7 +6,7 @@ import newProject from "../newProject.js";
 
 function LoggedInHome(props) {
   const navigate = useNavigate();
-  
+
   function GoToApp(projID) {
     async function fetchProject() {
       const response = await fetch(`http://localhost:5050/projects/${projID}`);
@@ -23,8 +23,6 @@ function LoggedInHome(props) {
         window.alert(`Record with id ${projID} not found`);
         return;
       }
-
-      console.log(project);
 
       props.setProject(() => {
         navigate("/olffloApp");
@@ -49,11 +47,26 @@ function LoggedInHome(props) {
       const newUserProject = {
         title: newProject.title,
         _id: id.insertedId,
-        items: newProject.items,
         image: newProject.image,
       };
 
-      console.log([...props.user.projects, newUserProject]);
+      const newProjectwithId = {
+        title: newProject.title,
+        _id: id.insertedId,
+        items: [
+          {
+            key: crypto.randomUUID(),
+            id: 1,
+            title: "Step 1",
+            feeds: [],
+            coords: [],
+            subItems: [],
+          },
+        ],
+        image: newProject.image,
+      };
+
+      console.log(newProject.items);
 
       const updatedUser =
         props.user.projects.length > 0
@@ -62,8 +75,6 @@ function LoggedInHome(props) {
               projects: [...props.user.projects, newUserProject],
             }
           : { ...props.user, projects: [newUserProject] };
-
-      console.log(updatedUser);
 
       props.setUser(() => {
         return updatedUser;
@@ -80,7 +91,7 @@ function LoggedInHome(props) {
 
       props.setProject(() => {
         navigate("/olffloApp");
-        return newUserProject;
+        return newProjectwithId;
       });
     }
 
@@ -141,10 +152,7 @@ function LoggedInHome(props) {
                   GoToApp(proj._id);
                 }}
               >
-                <img
-                  className="projectThumbnail"
-                  src={proj.image}
-                />{console.log(proj)}
+                <img className="projectThumbnail" src={proj.image} />
                 <div>{proj.title}</div>
               </div>
             ))}

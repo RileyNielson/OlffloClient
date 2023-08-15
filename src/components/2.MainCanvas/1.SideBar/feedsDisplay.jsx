@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClearIcon from "@mui/icons-material/Clear";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function FeedsDisplay(props) {
   function dropDown() {
