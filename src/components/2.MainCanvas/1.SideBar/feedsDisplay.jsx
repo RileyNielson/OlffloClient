@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClearIcon from "@mui/icons-material/Clear";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function FeedsDisplay(props) {
   function dropDown() {
@@ -30,7 +29,7 @@ function FeedsDisplay(props) {
 
   function deleteFeed(e) {
     const filteredArray = props.item.feeds.filter(
-      (eachItem) => eachItem != e.target.getAttribute("value")
+      (eachItem) => eachItem !== e.target.getAttribute("value")
     );
     if (props.item.feeds.length > 1) {
       props.updateItem({
@@ -87,8 +86,8 @@ function FeedsDisplay(props) {
           var itemAvailable = true;
           props.feeds.map((itemFeed) => {
             if (feed === itemFeed) {
-              itemAvailable = false;
-            }
+              return (itemAvailable = false);
+            } else return null;
           });
           if (itemAvailable && feed !== props.item.id) {
             itemAvailable = true;
@@ -97,7 +96,7 @@ function FeedsDisplay(props) {
                 {feed}
               </div>
             );
-          }
+          } else return null;
         })}
       </div>
     </div>

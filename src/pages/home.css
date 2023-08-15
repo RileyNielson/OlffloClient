@@ -54,11 +54,17 @@ h3 {
   font-family: "Pacifico", cursive;
   font-size: large;
   border-radius: 10px;
-  background-color: white;
+  color: white;
   border: 0;
-  filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
-    drop-shadow(-2px -2px 2px rgb(255, 188, 66))
-    drop-shadow(2px 2px 2px rgb(216, 17, 89));
+  background-image: linear-gradient(
+    to right,
+    rgb(4, 150, 255),
+    rgb(255, 188, 66),
+    rgb(216, 17, 89)
+  );
+  filter: drop-shadow(-2px 4px 1px rgba(84, 84, 84, 0.5))
+  drop-shadow(-2px -2px 1px rgba(84, 84, 84, 0.5))
+  drop-shadow(2px 2px 1px rgba(84, 84, 84, 0.5));
 }
 
 #signUpButton:active {
@@ -133,9 +139,10 @@ h3 {
 }
 
 .projectThumbnail {
-    margin-top: 10px;
-    height: 70%;
-    width: 70%;
+  margin-bottom: 10px;
+  height: 90%;
+  width: 90%;
+  object-fit: cover;
 }
 
 #featuresContainer {

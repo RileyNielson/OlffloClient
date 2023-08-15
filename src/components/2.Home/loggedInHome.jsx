@@ -152,8 +152,12 @@ function LoggedInHome(props) {
                   GoToApp(proj._id);
                 }}
               >
-                <img className="projectThumbnail" src={proj.image} />
-                <div>{proj.title}</div>
+                <p>{proj.title}</p>
+                <img
+                  className="projectThumbnail"
+                  src={proj.image}
+                  alt={proj.title}
+                />
               </div>
             ))}
           <div

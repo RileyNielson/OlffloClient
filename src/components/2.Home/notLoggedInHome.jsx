@@ -5,7 +5,6 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 
 function NotLoggedInHome() {
-
   useEffect(() => {
     const carouselElement = document.getElementById("carousel");
     carouselElement.scrollLeft =
@@ -47,7 +46,11 @@ function NotLoggedInHome() {
         Olfflo allows you to create intuitive workflows to simplify your
         processes.
       </h3>
-      <Link to="/signUp"><button id="signUpButton" type="submit">Sign Up</button></Link>
+      <Link to="/signUp">
+        <button id="signUpButton" type="submit">
+          Sign Up
+        </button>
+      </Link>
       <div id="homeCarousel">
         <div
           id="leftArrow"
@@ -61,7 +64,12 @@ function NotLoggedInHome() {
         <div id="carousel">
           {homePics.map((pic) => (
             <div className="homePic" style={{ backgroundColor: pic.color }}>
-              {pic.title}
+              <p>{pic.title}</p>
+              <img
+                className="projectThumbnail"
+                src={pic.urlSource}
+                alt={pic.title}
+              />
             </div>
           ))}
         </div>
@@ -76,7 +84,7 @@ function NotLoggedInHome() {
         </div>
       </div>
       <div id="featuresContainer">
-        <h2 id="subheading">A Project Management Tool For Everyone</h2>
+        <h2 id="subheading">A Project Management Tool For Anyone</h2>
         <div id="features">
           <div>
             <h3>Make</h3>
