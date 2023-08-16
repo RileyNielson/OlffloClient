@@ -3,7 +3,7 @@ import React from "react";
 function SaveButton(props) {
   async function saveProject(e) {
     e.preventDefault();
-    const imageURL = document.getElementById("canvas").toDataURL();
+    const imageURL = props.canvasRef.current.toDataURL();
 
     props.setProject({ ...props.project, image: props.imageURL });
 

@@ -107,7 +107,7 @@ function LoggedInHome(props) {
     const slideTimer = setInterval(() => {
       element.scrollLeft += step;
       scrollAmount += Math.abs(step);
-      if (scrollAmount >= element.offsetWidth) {
+      if (scrollAmount >= element.offsetWidth * 1.4) {
         clearInterval(slideTimer);
       }
       if (element.scrollLeft <= 0) {

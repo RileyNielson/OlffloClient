@@ -5,6 +5,7 @@ import TreeItem, { treeItemClasses } from "@mui/lab/TreeItem";
 import Collapse from "@mui/material/Collapse";
 import { useSpring, animated } from "@react-spring/web";
 import Item from "./Item";
+import NewSubItem from "./newSubItem";
 
 function TransitionComponent(props) {
   const style = useSpring({
@@ -48,6 +49,57 @@ const StyledTreeItem = styled((props) => (
 }));
 
 function ItemTree(props) {
+  function updateItem(item) {
+    props.updateItem({
+      ...props.item,
+      subItems: props.item.subItems.map((s) => {
+        if (s.key === item.key) {
+          return { ...item };
+        } else {
+          return { ...s };
+        }
+      }),
+    });
+  }
+
+  function deleteItem(subItem) {
+    var newArray = props.item.subItems.filter(
+      (eachItem) => eachItem.key !== subItem.key
+    );
+    const mappedArray = newArray.map((i) => {
+      var feedsArray = i.feeds;
+      var filterFeeds = false;
+      var reduceFeeds = false;
+      var reduceFeedIndex;
+      i.feeds.map((suc, ind) => {
+        if (suc === subItem.id) {
+          filterFeeds = true;
+        } else if (suc > subItem.id) {
+          reduceFeeds = true;
+          reduceFeedIndex = ind;
+        }
+      });
+      if (filterFeeds) {
+        feedsArray = i.feeds.filter((suc) => suc !== subItem.id);
+      }
+      if (reduceFeeds) {
+        feedsArray = [i.feeds[reduceFeedIndex] - 1];
+      }
+      if (i.id > subItem.id) {
+        return { ...i, id: i.id - 1, feeds: feedsArray };
+      }
+      console.log({ ...i, feedsArray });
+
+      return { ...i, feeds: feedsArray };
+    });
+
+    mappedArray.map((i, index) => {
+      i.id = props.item.id + "." + (index + 1);
+    });
+
+    props.updateItem({ ...props.item, subItems: mappedArray });
+  }
+
   return (
     <StyledTreeItem
       nodeId={props.item.key}
@@ -67,14 +119,24 @@ function ItemTree(props) {
           return (
             <ItemTree
               selectItem={props.selectItem}
-              updateItem={props.updateItem}
-              deleteItem={props.deleteItem}
+              updateItem={updateItem}
+              deleteItem={deleteItem}
               itemList={props.itemList}
               index={index}
               item={subItem}
             />
           );
         })}
+      <StyledTreeItem
+        nodeId={"Adder" + props.item.id}
+        label={
+          <NewSubItem
+            itemList={props.itemList}
+            updateItem={props.updateItem}
+            item={props.item}
+          />
+        }
+      ></StyledTreeItem>
     </StyledTreeItem>
   );
 }

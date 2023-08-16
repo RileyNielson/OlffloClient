@@ -11,7 +11,14 @@ function MenuBar(props) {
       <FileMenu />
       <EditMenu />
       <PrintMenu />
-      <SaveButton user={props.user} setUser={props.setUser} project={props.project} setProject={props.setProject} imageURL={props.imageURL}/>
+      <SaveButton
+        user={props.user}
+        setUser={props.setUser}
+        project={props.project}
+        setProject={props.setProject}
+        imageURL={props.imageURL}
+        canvasRef={props.canvasRef}
+      />
     </div>
   );
 }

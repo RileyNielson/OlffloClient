@@ -6,7 +6,6 @@ function NewItem(props) {
     key: crypto.randomUUID(),
     id: props.itemList.length + 1,
     title: "New Item",
-    image: "../../public/images/olffloLogo.png",
     feeds: [],
     coords: [0, 0, 0, 0],
     subItems: [],

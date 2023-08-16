@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import MenuBar from "./2.CanvasMenuBar/menuBar";
 import SideBar from "./1.SideBar/sideBar";
 import CanvasSpace from "./3.CanvasSpace/canvasSpace";
@@ -6,7 +6,9 @@ import CanvasSpace from "./3.CanvasSpace/canvasSpace";
 function MainCanvas(props) {
   const project = props.project;
   const [itemTitle, setItemTitle] = useState(project.items[0].title);
-  const [imageURL, setImageURL] = useState("")
+  const [imageURL, setImageURL] = useState("");
+
+  const canvasRef = useRef(null);
 
   function selectItem(item) {
     setItemTitle(item.title);
@@ -28,14 +30,14 @@ function MainCanvas(props) {
         ]);
 
       newList.splice(newItem.id - 1, 1, newItem);
-
-      setImageURL(document.getElementById("canvas").toDataURL())
       return { ...prev, items: newList };
     });
+
+    setImageURL(canvasRef.current.toDataURL());
+    setItemTitle(newItem.title)
   }
 
   function updateItem(item) {
-    console.log(item);
     props.setProject((prev) => {
       return {
         ...prev,
@@ -49,7 +51,7 @@ function MainCanvas(props) {
       };
     });
 
-    setImageURL(document.getElementById("canvas").toDataURL())
+    setImageURL(canvasRef.current.toDataURL());
     setItemTitle(item.title);
   }
 
@@ -73,7 +75,7 @@ function MainCanvas(props) {
         }
       });
       if (filterFeeds) {
-        feedsArray = i.feeds.filter((suc) => suc != item.id);
+        feedsArray = i.feeds.filter((suc) => suc !== item.id);
       }
       if (reduceFeeds) {
         feedsArray = [i.feeds[reduceFeedIndex] - 1];
@@ -94,7 +96,7 @@ function MainCanvas(props) {
     });
 
     setItemTitle(project.items[0].title);
-    setImageURL(document.getElementById("canvas").toDataURL())
+    setImageURL(canvasRef.current.toDataURL());
   }
 
   return (
@@ -117,8 +119,9 @@ function MainCanvas(props) {
         user={props.user}
         setUser={props.setUser}
         imageURL={imageURL}
+        canvasRef={canvasRef}
       />
-      <CanvasSpace itemList={project.items} />
+      <CanvasSpace itemList={props.project.items} canvasRef={canvasRef} project={project} updateItem={updateItem}/>
     </div>
   );
 }
