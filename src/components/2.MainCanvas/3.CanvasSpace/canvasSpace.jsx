@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import zoomVar from "../../zoomVar";
-import { Stage, Layer, Rect, Text, Arrow } from "react-konva";
+import { Stage, Layer, Rect, Text, Arrow, Group } from "react-konva";
+import { Portal } from "react-konva-utils";
+import SubItemBoxes from "./subItemBoxes";
 // import { update } from "@react-spring/web";
 
 function CanvasSpace(props) {
-  // const [arrows, setArrows] = useState([]);
+  const [testItems, setTestItems] = useState(props.ItemList);
+  const [subItems, setSubItems] = useState([]);
+  const [itemWithSubs, setItemWithSubs] = useState();
+  const [oldSubItems, setOldSubItems] = useState([]);
   var arrows = [];
 
-  console.log(props.itemList);
-
-  props.itemList.map((item) => {
-    item.subItems.map((s) => {
-      drawFillRect(s);
+  props.itemList.map((item, index) => {
+    item.subItems.map((s, ind) => {
+      drawFillRect(s, ind, item.subItems.length, item.coords);
     });
-    drawFillRect(item);
+    drawFillRect(item, index, props.itemList.length, [
+      0,
+      0,
+      5100 * zoomVar * 1.55,
+      0,
+    ]);
   });
 
   props.itemList.map((item) => {
@@ -31,21 +39,23 @@ function CanvasSpace(props) {
   });
 
   // draw rectangle with background
-  function drawFillRect(info) {
-    const totalWidth = 5100 * zoomVar * 1.55;
+  function drawFillRect(info, ind, arrayLength, coords) {
+    const totalWidth = coords[2];
     const totalHeight = 3300 * zoomVar * 1.55;
-    const itemCount = props.itemList.length;
+    const itemCount = arrayLength;
     const spacesCount = itemCount * 1.618 - 0.618;
     const canvasBorderWidth = 200;
     const spaceWidth = (totalWidth - canvasBorderWidth) / spacesCount;
 
-    var x = (info.id - 1) * spaceWidth * 1.618 + canvasBorderWidth / 2;
-    const w = spaceWidth;
+    var x = ind * spaceWidth * 1.618 + canvasBorderWidth / 2;
+    var w = spaceWidth;
     const h = 500 * zoomVar;
     var y = totalHeight / 2 - h / 2;
 
     if (typeof info.id === "string" && info.id.includes(".")) {
-      y = y +100;
+      x = (ind * totalWidth) / (2 * arrayLength) + coords[0];
+      y = y + 200;
+      w = totalWidth / (2 * arrayLength) + totalWidth / 2;
     }
 
     info.coords = [x, y, w, h];
@@ -135,24 +145,42 @@ function CanvasSpace(props) {
     arrows = [...arrows, arrowSpecs];
   }
 
-  console.log(arrows);
+  const layerRef = useRef(null);
 
-  function handleOnEnter(item) {
-    console.log("Item is" + item);
-    // return item.subItems.map((s) => {
-    //   return (
-    //     <Rect
-    //       x={s.coords[0]}
-    //       y={s.coords[1]}
-    //       width={s.coords[2]}
-    //       height={s.coords[3]}
-    //       fill="white"
-    //       stroke="rgb(4, 150, 255)"
-    //       cornerRadius={10}
-    //     />
-    //   );
-    // });
+  function handleStageClick(e) {
+    console.log(e.target);
+    if (e.target.attrs.id === "canvas") {
+      console.log("worked");
+      setSubItems([]);
+      setItemWithSubs();
+    }
   }
+
+  function handlePointerLeave() {
+    setSubItems([]);
+    setItemWithSubs();
+  }
+
+  function handleClick(item) {
+    console.log("working");
+    setSubItems(item.subItems);
+    setItemWithSubs(item);
+  }
+
+  function handleEnter(subItem, ind) {
+    setOldSubItems(JSON.parse(JSON.stringify(subItems)));
+    const subArray = JSON.parse(JSON.stringify(subItems));
+    subArray.splice(ind, 1);
+    subArray.push(subItem);
+    console.log(subArray);
+    setSubItems(subArray);
+  }
+
+  function handleExit() {
+    setSubItems(oldSubItems.sort((a, b) => a.id - b.id));
+  }
+
+  console.log(itemWithSubs);
 
   return (
     <div id="canvasSpace">
@@ -161,46 +189,60 @@ function CanvasSpace(props) {
         ref={props.canvasRef}
         width={5100 * zoomVar * 1.55}
         height={3300 * zoomVar * 1.55}
+        onClick={handleStageClick}
+        onMouseLeave={handlePointerLeave}
       >
-        <Layer>
-          {props.itemList.map((item) => (
-            <Rect
-              x={item.coords[0]}
-              y={item.coords[1]}
-              width={item.coords[2]}
-              height={item.coords[3]}
-              fill="white"
-              stroke="rgb(4, 150, 255)"
-              cornerRadius={10}
-            />
-          ))}
-          {props.itemList.map((item) => (
-            <Text
-              x={item.coords[0]}
-              y={item.coords[1]}
-              width={item.coords[2]}
-              height={item.coords[3]}
-              fontSize={20}
-              fill="rgb(4, 150, 255)"
-              text={item.title}
-              verticalAlign="middle"
-              align="center"
-              onMouseEnter={() => {
-                item.subItems.map((s) => {
-                  return (
-                    <Rect
-                      x={s.coords[0]}
-                      y={s.coords[1]}
-                      width={s.coords[2]}
-                      height={s.coords[3]}
-                      fill="black"
-                      stroke="rgb(4, 150, 255)"
-                      cornerRadius={10}
-                    />
-                  );
-                });
-              }}
-            />
+        <Layer ref={layerRef}>
+          {props.itemList.map((item, index) => (
+            <Group>
+              <Rect
+                x={item.coords[0]}
+                y={item.coords[1]}
+                width={item.coords[2]}
+                height={item.coords[3]}
+                fill="white"
+                stroke="rgb(4, 150, 255)"
+                cornerRadius={10}
+              />
+              <Text
+                x={item.coords[0]}
+                y={item.coords[1]}
+                width={item.coords[2]}
+                height={item.coords[3]}
+                fontSize={20}
+                fill="rgb(4, 150, 255)"
+                text={item.title}
+                verticalAlign="middle"
+                align="center"
+                onClick={() => handleClick(item)}
+              />
+              {subItems.map((s, ind) => (
+                <Group>
+                  <Rect
+                    x={s.coords[0]}
+                    y={s.coords[1]}
+                    width={s.coords[2]}
+                    height={s.coords[3]}
+                    fill="white"
+                    stroke="rgb(4, 150, 255)"
+                    cornerRadius={10}
+                  />
+                  <Text
+                    x={s.coords[0]}
+                    y={s.coords[1]}
+                    width={s.coords[2]}
+                    height={s.coords[3]}
+                    fontSize={20}
+                    fill="rgb(4, 150, 255)"
+                    text={s.title}
+                    verticalAlign="middle"
+                    align="center"
+                    onPointerEnter={(e) => handleEnter(s, ind)}
+                    onPointerLeave={handleExit}
+                  />
+                </Group>
+              ))}
+            </Group>
           ))}
           {arrows.map((arr) => (
             <Arrow
@@ -213,7 +255,19 @@ function CanvasSpace(props) {
               strokeWidth={4}
             />
           ))}
+          {itemWithSubs && itemWithSubs.subItems.length > 0 && (
+            <Arrow
+              x={itemWithSubs.coords[0] + itemWithSubs.coords[2] / 2}
+              y={itemWithSubs.coords[1] + itemWithSubs.coords[3]}
+              points={[0, 0, 0, 111]}
+              pointerLength={10}
+              pointerWidth={10}
+              stroke={"rgb(4, 150, 255)"}
+              strokeWidth={4}
+            />
+          )}
         </Layer>
+        <Layer name="top-layer" />
       </Stage>
     </div>
   );

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Layout from "../pages/layout";
 import Home from "../pages/home";
 import NoPage from "../pages/nopage";
