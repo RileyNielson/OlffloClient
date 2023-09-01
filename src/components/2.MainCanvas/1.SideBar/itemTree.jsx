@@ -78,6 +78,7 @@ function ItemTree(props) {
           reduceFeeds = true;
           reduceFeedIndex = ind;
         }
+        return;
       });
       if (filterFeeds) {
         feedsArray = i.feeds.filter((suc) => suc !== subItem.id);
@@ -95,6 +96,7 @@ function ItemTree(props) {
 
     mappedArray.map((i, index) => {
       i.id = props.item.id + "." + (index + 1);
+      return;
     });
 
     props.updateItem({ ...props.item, subItems: mappedArray });
