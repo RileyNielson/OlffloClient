@@ -15,7 +15,7 @@ function Header(props) {
           </div>
         </Link>
         <div id="headerContentContainer">
-          <div>
+          {/* <div>
             <HeaderMenu menuTitle="Templates" />
           </div>
           <div>
@@ -26,7 +26,7 @@ function Header(props) {
           </div>
           <div>
             <HeaderMenu menuTitle="Contact" />
-          </div>
+          </div> */}
         </div>
       </div>
       <div id="accountMenu">
