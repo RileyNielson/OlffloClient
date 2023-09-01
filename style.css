@@ -1,0 +1,480 @@
+/* 0, 107, 166 */
+/* 4, 150, 255 */
+/* 255, 188, 66 */
+/* 216, 17, 89 */
+/* 143, 45, 86 */
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#mainContainer {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  display: grid;
+  grid-template: 80px 5px 1fr 30px /20px 1fr 20px;
+  background: white;
+}
+
+#mainNavBar {
+  z-index: 1;
+  position: fixed;
+  height: 80px;
+  width: 100vw;
+  font-family: "Pacifico", cursive;
+  font-size: 28px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 3px 6px rgb(240, 240, 240);
+  padding-bottom: 5px;
+}
+
+#logoBox {
+  color: white;
+  text-decoration: none;
+  margin-left: 100px;
+  display: flex;
+  height: 100%;
+  margin: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+#logoImg {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 80%;
+  filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 2px rgb(255, 188, 66))
+    drop-shadow(2px 2px 2px rgb(216, 17, 89));
+}
+
+#logoName {
+  margin: 0;
+  filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 2px rgb(255, 188, 66))
+    drop-shadow(2px 2px 2px rgb(216, 17, 89));
+}
+
+#headerContentContainer {
+  margin-left: 10px;
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerMenuTitle {
+  font-family: "Barlow", sans-serif;
+  font-size: 20px;
+  text-transform: capitalize;
+  color: rgb(84, 84, 84);
+}
+
+#accountMenu {
+  font-family: "Barlow", sans-serif;
+  font-size: 25px;
+  color: rgb(84, 84, 84);
+  margin-right: 50px;
+}
+
+#loginMenu {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-items: center;
+}
+
+.loginButton {
+  position: relative;
+  cursor: pointer;
+  width: 110px;
+  height: 40px;
+  color: rgb(84, 84, 84);
+  font-family: "Pacifico", cursive;
+  font-size: large;
+  border-radius: 10px;
+  background-color: white;
+  border: 0;
+  filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 2px rgb(255, 188, 66))
+    drop-shadow(2px 2px 2px rgb(216, 17, 89));
+}
+
+.loginButton:active {
+  filter: drop-shadow(-2px 4px 1px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 1px rgb(255, 188, 66))
+    drop-shadow(2px 2px 1px rgb(216, 17, 89));
+}
+
+.signUpButton {
+  position: relative;
+  cursor: pointer;
+  width: 110px;
+  height: 40px;
+  color: rgb(84, 84, 84);
+  font-family: "Pacifico", cursive;
+  font-size: large;
+  border-radius: 10px;
+  color: white;
+  border: 0;
+  background-image: linear-gradient(
+    to right,
+    rgb(4, 150, 255),
+    rgb(255, 188, 66),
+    rgb(216, 17, 89)
+  );
+  filter: drop-shadow(-2px 4px 1px rgba(84, 84, 84, 0.5))
+    drop-shadow(-2px -2px 1px rgba(84, 84, 84, 0.5))
+    drop-shadow(2px 2px 1px rgba(84, 84, 84, 0.5));
+}
+
+.signUpButton:active {
+  filter: drop-shadow(-1px 2px 1px rgba(84, 84, 84, 0.5))
+    drop-shadow(-1px -1px 1px rgba(84, 84, 84, 0.5))
+    drop-shadow(1px 1px 1px rgba(84, 84, 84, 0.5));
+}
+
+#glowBar {
+  height: 100%;
+  width: 100%;
+  grid-column: 1/4;
+  grid-row: 2;
+  filter: drop-shadow(0px 3px 2px rgb(216, 17, 89));
+  z-index: 0;
+}
+
+#mainCanvas {
+  grid-column: 2;
+  grid-row: 3/4;
+  background-color: rgb(236, 240, 243);
+  align-self: center;
+  height: 96%;
+  width: 100%;
+  display: grid;
+  grid-template: 30px 1fr / 350px 1fr;
+  filter: drop-shadow(0px 0px 6px rgb(202, 202, 202));
+  border-radius: 10px;
+  overflow: auto;
+}
+
+#sideBar {
+  box-sizing: border-box;
+  grid-column: 1;
+  grid-row: 1/3;
+  background-color: rgb(236, 240, 243);
+  border-right: 2px solid rgb(245, 245, 245);
+  min-height: 10px;
+  max-width: 350px;
+  display: grid;
+  grid-template: 60px 1fr / 1fr;
+  justify-content: end;
+  align-items: start;
+  z-index: 1;
+}
+
+#sideBarHeader {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  width: 280px;
+  align-self: center;
+  margin-left: 10px;
+  font-weight: 900;
+  border-bottom: 2px solid rgb(245, 245, 245);
+}
+
+#projectName {
+  font-size: 30px;
+  height: 40px;
+  width: 270px;
+  color: rgb(0, 107, 166);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#projectName:hover:not(:focus) {
+  color: rgba(4, 150, 255, 0.6);
+  border: 2px solid rgba(4, 150, 255, 0.6);
+  border-radius: 10px;
+  box-shadow: inset -3px -3px 6px white,
+    inset 3px 3px 5px rgba(202, 202, 202, 0.6);
+}
+
+#projectName:focus {
+  color: rgba(4, 150, 255, 0.6);
+  border: 2px solid rgb(4, 150, 255);
+  border-radius: 10px;
+  outline: none;
+  box-shadow: inset -3px -3px 6px white,
+    inset 3px 3px 5px rgba(202, 202, 202, 0.6);
+}
+
+#sideBarBody {
+  box-sizing: border-box;
+  grid-column: 1/2;
+  grid-row: 2/3;
+  height: 98%;
+  margin-left: 10px;
+  border-radius: 10px;
+  width: 95%;
+  color: rgb(0, 107, 166);
+  overflow-y: auto;
+  border: 2px solid transparent;
+  background-color: white;
+}
+
+#sideBarBodyStuff {
+  width: 40%;
+  background-color: white;
+}
+
+#sideBarBody:hover {
+  border: 2px solid rgba(4, 150, 255, 0.6);
+}
+
+#sideBarBody:focus {
+  border: 2px solid rgba(4, 150, 255, 1);
+}
+
+#sideBarLables {
+  position: absolute;
+  width: 325px;
+  z-index: 1;
+  background-color: white;
+  font-size: 18px;
+  display: grid;
+  grid-template: 1fr / 45px 150px 90px 30px;
+  border-bottom: 1px solid rgb(0, 107, 166);
+}
+
+#sideBarID {
+  grid-column: 1/2;
+  text-align: right;
+  align-items: center;
+}
+
+#sideBarTitle {
+  margin-left: 4px;
+  grid-column: 2/3;
+  width: 100px;
+  text-align: left;
+  align-items: center;
+}
+
+#sideBarSuc {
+  grid-column: 3/4;
+  text-align: left;
+  padding-left: 5px;
+  align-items: center;
+}
+
+#sideBarDelete {
+  grid-column: 4/5;
+  text-align: center;
+}
+
+#sideBarItems {
+  height: 95%;
+  margin-top: 25px;
+  overflow-y: auto;
+}
+
+.sideBarItem {
+  display: grid;
+  grid-template: 1fr / 40px 120px 90px 30px;
+}
+
+.itemIDTag {
+  grid-column: 1/2;
+  margin-right: 10px;
+  color: rgb(216, 17, 89);
+}
+
+.sideBarTitle {
+  position: relative;
+  padding: 0;
+  grid-column: 2/3;
+  border: 0;
+  color: rgb(4, 150, 255);
+  font-size: 18px;
+  width: 90px;
+  outline: none;
+}
+
+.feedContainer {
+  display: flex;
+  align-items: center;
+}
+
+.feedItems {
+  width: 90px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+}
+
+.displayItems {
+  flex-wrap: wrap;
+}
+
+.feedChip {
+  display: inline;
+  color: white;
+  background-color: rgb(250, 200, 109);
+  font-size: small;
+  width: fit-content;
+  padding-left: 5px;
+  margin-left: 3px;
+  margin-bottom: 3px;
+  padding-right: 2px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedDelete {
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  margin-left: 2px;
+  height: 15px;
+  width: 15px;
+  color: white;
+  background-color: rgba(0, 0, 0, .1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedDelete:hover {
+  background-color: rgb(199, 199, 199);
+}
+
+.dropDownContent {
+  display: none;
+  position: absolute;
+  top: 100%;
+  height: 100px;
+  background-color: #f9f9f9;
+  width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  z-index: 1;
+  overflow: auto;
+}
+
+.dropDownContent div:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+.myInput {
+  width: 70px;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.myInput:focus {
+  outline: 3px solid #ddd;
+}
+
+#submitButton {
+  grid-column: 4/5;
+  justify-self: center;
+  width: 15px;
+  height: 20px;
+  align-self: center;
+  height: fit-content;
+  margin-left: 2px;
+  text-align: center;
+  font-size: small;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  border-radius: 50%;
+  color: rgb(216, 17, 89);
+}
+
+#submitButton:hover {
+  background-color: rgb(199, 199, 199);
+  cursor: pointer;
+}
+
+#menuBar {
+  grid-column: 2/3;
+  grid-row: 1;
+  height: 80%;
+  background-color: rgb(236, 240, 243);
+  margin-left: 10px;
+  color: rgb(4, 150, 255);
+  display: flex;
+  align-self: center;
+  align-items: center;
+  border-bottom: 2px solid rgb(245, 245, 245);
+  z-index: 0;
+}
+
+#canvasSpace {
+  grid-column: 2/3;
+  grid-row: 2;
+  background-color: white;
+  overflow: scroll;
+}
+
+#canvas {
+  overflow: scroll;
+}
+
+h3 {
+  margin: 0;
+  margin-left: 10px;
+}
+
+#saveButton {
+  position: relative;
+  right: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: white;
+  filter: drop-shadow(-2px 4px 2px rgb(4, 150, 255))
+    drop-shadow(-2px -2px 2px rgb(255, 188, 66))
+    drop-shadow(2px 2px 2px rgb(216, 17, 89));
+}
+
+#footer {
+  grid-column: 1 / 4;
+  grid-row: 4;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  font-family: "Pacifico", cursive;
+  color: white;
+  height: 30px;
+  width: 100%;
+  background-color: rgb(255, 188, 66);
+  background-image: linear-gradient(
+    to right,
+    rgb(4, 150, 255),
+    rgb(255, 188, 66),
+    rgb(216, 17, 89)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#footerImg {
+  height: 70%;
+  margin: 5px;
+}
