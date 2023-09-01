@@ -8,7 +8,7 @@ function SaveButton(props) {
     props.setProject({ ...props.project, image: props.imageURL });
 
     // This will send a post request to update the data in the database.
-    const response = await fetch(
+    await fetch(
       `http://localhost:5050/projects/${props.project._id}`,
       {
         method: "PATCH",

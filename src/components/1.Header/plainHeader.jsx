@@ -1,8 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AccountMenu from "./accountMenu";
-import HeaderMenu from "./headerMenu";
-import LoginMenu from "./loginMenu";
 
 function PlainHeader(props) {
   return (

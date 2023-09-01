@@ -1,12 +1,8 @@
 import React, { useState, useRef } from "react";
 import zoomVar from "../../zoomVar";
 import { Stage, Layer, Rect, Text, Arrow, Group } from "react-konva";
-import { Portal } from "react-konva-utils";
-import SubItemBoxes from "./subItemBoxes";
-// import { update } from "@react-spring/web";
 
 function CanvasSpace(props) {
-  const [testItems, setTestItems] = useState(props.ItemList);
   const [subItems, setSubItems] = useState([]);
   const [itemWithSubs, setItemWithSubs] = useState();
   const [oldSubItems, setOldSubItems] = useState([]);
@@ -67,7 +63,7 @@ function CanvasSpace(props) {
     const totalHeight = 3300 * zoomVar * 1.55;
 
     const x = fromItem.coords[0];
-    const y = totalHeight / 2;
+    var y = totalHeight / 2;
     const w = fromItem.coords[2];
 
     var fromx = x + w,
