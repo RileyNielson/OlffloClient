@@ -9,7 +9,7 @@ function LoggedInHome(props) {
 
   function GoToApp(projID) {
     async function fetchProject() {
-      const response = await fetch(`http://localhost:5050/projects/${projID}`);
+      const response = await fetch(`http://olffloapi.com/projects/${projID}`);
 
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
@@ -31,7 +31,7 @@ function LoggedInHome(props) {
     }
 
     async function createProject() {
-      const createResponse = await fetch("http://localhost:5050/projects", {
+      const createResponse = await fetch("http://olffloapi.com/projects", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -81,7 +81,7 @@ function LoggedInHome(props) {
       });
 
       // This will send a post request to update the data in the database.
-      await fetch(`http://localhost:5050/users/${props.user._id}`, {
+      await fetch(`http://olffloapi.com/users/${props.user._id}`, {
         method: "PATCH",
         body: JSON.stringify(updatedUser),
         headers: {

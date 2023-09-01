@@ -28,7 +28,7 @@ export default function SignUp(props) {
     //const newPerson = { ...form };
     props.setUser(newPerson);
 
-    await fetch("http://localhost:5050/users", {
+    await fetch("http://olffloapi.onrender.com/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export default function SignUp(props) {
 
     async function fetchData() {
       console.log(doc._id);
-      const response = await fetch(`http://localhost:5050/users/${doc._id}`);
+      const response = await fetch(`http://olffloapi.onrender.com/users/${doc._id}`);
       
       if (!response.ok) {
         onSubmit(doc);
