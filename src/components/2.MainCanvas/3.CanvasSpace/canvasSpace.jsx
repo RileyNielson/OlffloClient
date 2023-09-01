@@ -11,6 +11,7 @@ function CanvasSpace(props) {
   props.itemList.map((item, index) => {
     item.subItems.map((s, ind) => {
       drawFillRect(s, ind, item.subItems.length, item.coords);
+      return s;
     });
     drawFillRect(item, index, props.itemList.length, [
       0,
@@ -18,6 +19,7 @@ function CanvasSpace(props) {
       5100 * zoomVar * 1.55,
       0,
     ]);
+    return item;
   });
 
   props.itemList.map((item) => {
@@ -29,9 +31,13 @@ function CanvasSpace(props) {
             drawArrow(item, suc2, suc2Index) &&
             suc2.subItems.feeds.map((suc3, suc3Index) => {
               suc3 !== null && drawArrow(item, suc3, suc3Index);
+              return suc3;
             });
+          return suc2;
         });
+      return suc;
     });
+    return item;
   });
 
   // draw rectangle with background

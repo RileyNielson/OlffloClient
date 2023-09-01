@@ -22,6 +22,7 @@ function MainCanvas(props) {
         if (f === newItem.id) {
           feedAlreadyExists = true;
         }
+        return f;
       });
       !feedAlreadyExists &&
         (newList[newItem.id - 2].feeds = [
@@ -34,7 +35,7 @@ function MainCanvas(props) {
     });
 
     setImageURL(canvasRef.current.toDataURL());
-    setItemTitle(newItem.title)
+    setItemTitle(newItem.title);
   }
 
   function updateItem(item) {
@@ -73,6 +74,7 @@ function MainCanvas(props) {
           reduceFeeds = true;
           reduceFeedIndex = ind;
         }
+        return suc;
       });
       if (filterFeeds) {
         feedsArray = i.feeds.filter((suc) => suc !== item.id);
@@ -89,6 +91,7 @@ function MainCanvas(props) {
 
     mappedArray.map((i, index) => {
       i.id = index + 1;
+      return i;
     });
 
     props.setProject((prev) => {
@@ -121,7 +124,12 @@ function MainCanvas(props) {
         imageURL={imageURL}
         canvasRef={canvasRef}
       />
-      <CanvasSpace itemList={props.project.items} canvasRef={canvasRef} project={project} updateItem={updateItem}/>
+      <CanvasSpace
+        itemList={props.project.items}
+        canvasRef={canvasRef}
+        project={project}
+        updateItem={updateItem}
+      />
     </div>
   );
 }
