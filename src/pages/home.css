@@ -139,10 +139,18 @@ h3 {
   align-items: center;
 }
 
+.homePicDiv{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
 .projectThumbnail {
   margin-bottom: 10px;
-  height: 90%;
-  width: 90%;
+  height: 400px;
+  overflow: hidden;
   object-fit: cover;
 }
 
