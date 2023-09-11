@@ -9,7 +9,7 @@ function SaveButton(props) {
 
     // This will send a post request to update the data in the database.
     await fetch(
-      `http://localhost:5050/projects/${props.project._id}`,
+      `https://olffloapi.onrender.com/projects/${props.project._id}`,
       {
         method: "PATCH",
         body: JSON.stringify({ ...props.project, image: imageURL }),
@@ -36,7 +36,7 @@ function SaveButton(props) {
     });
 
     // This will send a post request to update the data in the database.
-    await fetch(`http://localhost:5050/users/${props.user._id}`, {
+    await fetch(`https://olffloapi.onrender.com/users/${props.user._id}`, {
       method: "PATCH",
       body: JSON.stringify({
         ...props.user,
