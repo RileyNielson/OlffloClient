@@ -73,9 +73,14 @@ h3 {
     drop-shadow(2px 2px 1px rgb(216, 17, 89));
 }
 
+#demoTitle {
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
 #homeCarousel {
   position: relative;
-  margin-top: 50px;
+  margin-top: 10px;
   width: 90%;
   display: flex;
   align-items: center;

@@ -74,6 +74,7 @@ export default function SignUp(props) {
       } else {
         updateForm(user);
         props.setUser(user);
+        console.log("user Set");
         setForm(user);
       }
     }

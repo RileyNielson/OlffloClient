@@ -22,7 +22,7 @@ function Home(props) {
           project={props.project}
         />
       ) : (
-        <NotLoggedInHome />
+        <NotLoggedInHome setProject={props.setProject}/>
       )}
       <div id="homeFooter">
         <Footer />

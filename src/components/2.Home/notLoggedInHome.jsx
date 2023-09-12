@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import homePics from "./homePics";
+import { Link, useNavigate } from "react-router-dom";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import DemoProjects from "./demoProjects";
 
-function NotLoggedInHome() {
+function NotLoggedInHome(props) {
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const carouselElement = document.getElementById("carousel");
     carouselElement.scrollLeft =
@@ -39,6 +42,13 @@ function NotLoggedInHome() {
     }, 5);
   }
 
+  function handleDemoClick(project) {
+    props.setProject(() => {
+      navigate("/olffloApp");
+      return project;
+    });
+  }
+
   return (
     <div id="homeBody">
       <div id="homeTitle">
@@ -55,6 +65,7 @@ function NotLoggedInHome() {
           Sign Up
         </button>
       </Link>
+      <h3 id="demoTitle">Try A Demo</h3>
       <div id="homeCarousel">
         <div
           id="leftArrow"
@@ -66,13 +77,17 @@ function NotLoggedInHome() {
           <ArrowCircleLeftIcon fontSize="large" />
         </div>
         <div id="carousel">
-          {homePics.map((pic) => (
-            <div className="homePic" style={{ backgroundColor: pic.color }}>
+          {DemoProjects.map((pic) => (
+            <div
+              className="homePic"
+              style={{ backgroundColor: "white" }}
+              onClick={() => handleDemoClick(pic)}
+            >
               <p>{pic.title}</p>
               <div className="homePicDiv">
                 <img
                   className="projectThumbnail"
-                  src={pic.urlSource}
+                  src={pic.image}
                   alt={pic.title}
                 />
               </div>
