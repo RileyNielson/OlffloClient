@@ -74,6 +74,9 @@ h3 {
 }
 
 #demoTitle {
+  font-family: "Barlow", sans-serif;
+  font-weight: 700;
+  color: black;
   margin-top: 50px;
   margin-bottom: 0px;
 }
