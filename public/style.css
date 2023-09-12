@@ -64,7 +64,7 @@ body {
 
 #headerContentContainer {
   margin-left: 10px;
-  width: 50%;
+  width: 20%;
   display: flex;
   justify-content: space-between;
 }
@@ -347,7 +347,7 @@ body {
   height: 15px;
   width: 15px;
   color: white;
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -477,4 +477,33 @@ h3 {
 #footerImg {
   height: 70%;
   margin: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  #logoImg {
+    width: 10vw;
+    height: auto;
+  }
+
+  #logoName {
+    font-size: 7vw;
+  }
+
+  #accountMenu {
+    margin-right: 10%;
+  }
+
+  #loginMenu {
+    gap: 5%;
+  }
+
+  .loginButton {
+    width: 20vw;
+    font-size: 15px;
+  }
+
+  .signUpButton {
+    width: 20vw;
+    font-size: 15px;
+  }
 }

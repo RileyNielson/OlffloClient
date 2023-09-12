@@ -12,11 +12,15 @@ function NotLoggedInHome() {
   }, []);
 
   function handleHorizontalScroll(element, step) {
-    let scrollAmount = 150;
+    var scrollAmount = 0;
+    var scrollWidth;
+    window.innerWidth > 760
+      ? (scrollWidth = window.innerWidth / 2)
+      : (scrollWidth = 200);
     const slideTimer = setInterval(() => {
       element.scrollLeft += step;
       scrollAmount += Math.abs(step);
-      if (scrollAmount >= element.offsetWidth) {
+      if (scrollAmount >= scrollWidth) {
         clearInterval(slideTimer);
       }
       if (element.scrollLeft <= 0) {
