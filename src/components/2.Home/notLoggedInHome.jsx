@@ -60,11 +60,11 @@ function NotLoggedInHome(props) {
         Olfflo allows you to create intuitive workflows to simplify your
         processes.
       </h3>
-      <Link to="/signUp">
+      {/* <Link to="/signUp">
         <button id="signUpButton" type="submit">
           Sign Up
         </button>
-      </Link>
+      </Link> */}
       <h3 id="demoTitle">Try A Demo</h3>
       <div id="homeCarousel">
         <div
