@@ -479,7 +479,7 @@ h3 {
   margin: 5px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 660px) {
   #logoImg {
     width: 10vw;
     height: auto;
@@ -505,5 +505,50 @@ h3 {
   .signUpButton {
     width: 20vw;
     font-size: 15px;
+  }
+
+  #mainCanvas {
+    grid-template: 30px 1fr / 50% 1fr;
+  }
+
+  #sideBar {
+    width: 100%;
+    overflow: auto;
+    justify-content: start;
+    grid-template: 60px 1fr / 100%;
+  }
+
+  #sideBarHeader {
+    width: 100%;
+  }
+
+  #sideBarBody {
+    box-sizing: border-box;
+    grid-column: 1/2;
+    grid-row: 2/3;
+    height: 98%;
+    margin-left: 10px;
+    border-radius: 10px;
+    width: fit-content;
+    color: rgb(0, 107, 166);
+    overflow-y: scroll;
+    border: 2px solid transparent;
+    background-color: white;
+  }
+
+  #sideBarLables {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    font-size: 18px;
+    display: grid;
+    grid-template: 1fr / 10% 50% 30% 10%;
+    border-bottom: 1px solid rgb(0, 107, 166);
+  }
+
+  #sideBarItems{
+    width: fit-content;
+    margin-top: 0px;
+    overflow: hidden;
   }
 }

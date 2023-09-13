@@ -128,12 +128,13 @@ h3 {
   width: 80%;
   display: flex;
   overflow: hidden;
-  gap: 10px;
+  gap: 0px;
 }
 
 .homePic {
   margin: 20px;
   border-radius: 10px;
+  margin: 10px 20px;
   width: 250px;
   min-width: 250px;
   height: 200px;
@@ -207,7 +208,7 @@ h3 {
   width: 100vw;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 660px) {
   #homeCarousel {
     width: 100%;
   }

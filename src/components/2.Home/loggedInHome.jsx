@@ -8,6 +8,7 @@ function LoggedInHome(props) {
   const navigate = useNavigate();
 
   function GoToApp(projID) {
+    
     async function fetchProject() {
       const response = await fetch(`http://olffloapi.onrender.com/projects/${projID}`);
 
