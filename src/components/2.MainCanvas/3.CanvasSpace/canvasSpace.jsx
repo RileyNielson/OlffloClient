@@ -16,7 +16,7 @@ function CanvasSpace(props) {
     drawFillRect(item, index, props.itemList.length, [
       0,
       0,
-      window.innerWidth*3/4,
+      5100 * zoomVar * 1.55,
       0,
     ]);
     return item;
@@ -43,7 +43,7 @@ function CanvasSpace(props) {
   // draw rectangle with background
   function drawFillRect(info, ind, arrayLength, coords) {
     const totalWidth = coords[2];
-    const totalHeight = window.innerHeight;
+    const totalHeight = 3300 * zoomVar * 1.55;
     const itemCount = arrayLength;
     const spacesCount = itemCount * 1.618 - 0.618;
     const canvasBorderWidth = 200;
@@ -66,7 +66,7 @@ function CanvasSpace(props) {
   function drawArrow(fromItem, toID, sucIndex) {
     const toItem = props.itemList[toID - 1];
     //variables to be used when creating the arrow
-    const totalHeight = window.innerHeight;
+    const totalHeight = 3300 * zoomVar * 1.55;
 
     const x = fromItem.coords[0];
     var y = totalHeight / 2;
@@ -189,8 +189,8 @@ function CanvasSpace(props) {
       <Stage
         id="canvas"
         ref={props.canvasRef}
-        width={window.outerWidth*3/4}
-        height={window.innerHeight}
+        width={5100 * zoomVar * 1.55}
+        height={3300 * zoomVar * 1.55}
         onClick={handleStageClick}
         onMouseLeave={handlePointerLeave}
       >
